@@ -1,0 +1,54 @@
+<!--<?xml version="1.0" encoding="utf-8"?>&lt;!&ndash; 进入动画 &ndash;&gt;-->
+
+<!--<scale xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+<!--android:duration="@android:integer/config_shortAnimTime"-->
+
+<!--android:fromXScale="1"-->
+
+<!--android:fromYScale="-1"-->
+
+<!--android:interpolator="@android:anim/decelerate_interpolator"-->
+
+<!--android:toXScale="1"-->
+
+<!--android:toYScale="0" />-->
+
+
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true"
+    android:fillBefore="false"
+    android:fillEnabled="true">
+    <translate
+        android:duration="1"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:toXDelta="0"
+        android:toYDelta="260" />
+    <translate
+        android:duration="100"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:toXDelta="0"
+        android:toYDelta="-270" />
+    <alpha
+        android:duration="50"
+        android:fromAlpha="0"
+        android:interpolator="@android:anim/decelerate_interpolator"
+        android:toAlpha="1" />
+    <translate
+        android:duration="80"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:startOffset="180"
+        android:toXDelta="0"
+        android:toYDelta="20" />
+    <translate
+        android:duration="60"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:startOffset="240"
+        android:toXDelta="0"
+        android:toYDelta="-10" />
+</set>

@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 自定义的Toast动画 -->
+    <style name="Base.Toast.Anim" parent="@android:style/Animation.Toast">
+        <item name="android:windowEnterAnimation">@anim/toast_enter</item>
+        <item name="android:windowExitAnimation">@anim/toast_exit</item>
+    </style>
+
+    <!--titleView-->
+    <declare-styleable name="Base.TMTitleView">
+        <attr name="titleText" format="string" />
+        <attr name="bottomHorViewIsShow" format="boolean" />
+    </declare-styleable>
+
+    <!-- pop弹窗动画 -->
+    <!-- pop从底部弹出动画 -->
+    <style name="Base.PopAnim.FromBottom" parent="@android:style/Animation.Toast">
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowEnterAnimation">@anim/base_pop_anim_from_bottom</item>
+        <!-- 指定消失的动画xml -->
+        <item name="android:windowExitAnimation">@anim/base_pop_anim_from_top</item>
+    </style>
+
+    <!-- pop 渐变显示动画 -->
+    <style name="Base.PopAnim.FromAlpha" parent="@android:style/Animation.Toast">
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowEnterAnimation">@anim/base_pop_anim_alpha_to_show</item>
+        <!-- 指定消失的动画xml -->
+        <item name="android:windowExitAnimation">@anim/base_pop_anim_alpha_to_no</item>
+    </style>
+
+    <!-- activity 透明主题 -->
+    <style name="TransparentTransparent">
+        <item name="android:windowBackground">#00ffffff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <!-- 透明主题 -->
+    <style name="LunencyTheme">
+        <item name="android:windowBackground">#00ffffff</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+</resources>
