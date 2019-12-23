@@ -3,6 +3,6 @@
   
   
   
-[![](https://jitpack.io/v/Mr-Bian/JZFrame.svg)](https://jitpack.io/#Mr-Bian/JZFrame)
-###### 简单整理自造APP的整体框架
+
+###### [![](https://jitpack.io/v/Mr-Bian/JZFrame.svg)](https://jitpack.io/#Mr-Bian/JZFrame) 简单整理自造APP的整体框架
 
