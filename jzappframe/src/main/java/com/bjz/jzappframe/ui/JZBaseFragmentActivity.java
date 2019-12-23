@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.ui.page;
+package com.bjz.jzappframe.ui;
 
 import android.animation.ArgbEvaluator;
 import android.app.Activity;
@@ -52,7 +52,7 @@ import java.util.Map;
 
 
 */
-public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity implements IJZBaseView {
+public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends Activity implements IJZBaseView {
 
     /* 生命周期辅助类 */
     private JZPageLeftCycle pageLeftCycle;
@@ -160,10 +160,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         /* 添加左侧点击遮盖布局 -- 用来做拖动页面退出操作 */
         leftClickCoverView = new View(this);
         /* 用来拦截此区域的点击事件 */
-        leftClickCoverView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
+        leftClickCoverView.setOnClickListener(v -> {
         });
         bigGroupView.addView(leftClickCoverView, new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.dimens_20), RelativeLayout.LayoutParams.MATCH_PARENT));
         /* 容器加载到 页面中 */
@@ -188,17 +185,10 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
                     .init();
         }
 
-//        findViewById(R.id.content).setBackgroundResource(R.color._ff8f0a);
-
-        decorView = this.getWindow().getDecorView();
-//        decorView.setBackgroundResource(R.color.TRANSPARENT);
-        decorView.setBackgroundResource(R.color._ff8f0a);
         initView();
         initData();
         setListener();
     }
-
-    View decorView;
 
     public abstract int getResId();
 
@@ -223,17 +213,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     /* v：存储请求接口所用线程 */
     public Map<String, Runnable> requestRunMap = new HashMap<>();
 
-    public Runnable testRun = new Runnable() {
-        @Override
-        public void run() {
-            JZBaseActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    JZLog.d("检查", "线程请求模拟1");
-                }
-            });
-        }
-    };
+    public Runnable testRun = () -> JZBaseFragmentActivity.this.runOnUiThread(() -> JZLog.d("检查", "线程请求模拟1"));
 
     /* 页面跳转 */
     public void jumpNextPage(JZPageData pageData, Class activity) {
@@ -306,24 +286,18 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         isStop = false;
         isDestory = false;
         pageLeftCycle.onPause();
-        postDelayed(300, new JZOneStatusCallBack() {
-            @Override
-            public void result(Object result) {
-                if (isFirstInto) {
-                    isFirstInto = false;
-                }
+        postDelayed(300, result -> {
+            if (isFirstInto) {
+                isFirstInto = false;
             }
         });
     }
 
     /* 延时方法调用 */
     public void postDelayed(long time, final JZOneStatusCallBack oneStatusCallBack) {
-        bigGroupView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (oneStatusCallBack != null) {
-                    oneStatusCallBack.result("");
-                }
+        bigGroupView.postDelayed(() -> {
+            if (oneStatusCallBack != null) {
+                oneStatusCallBack.result("");
             }
         }, time);
     }

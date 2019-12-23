@@ -1,6 +1,6 @@
 package com.example.jzframedemo;
 
-import com.bjz.jzappframe.ui.page.JZBaseActivity;
+import com.bjz.jzappframe.ui.JZBaseActivity;
 
 public class MainActivity extends JZBaseActivity<MainPresenter> {
 

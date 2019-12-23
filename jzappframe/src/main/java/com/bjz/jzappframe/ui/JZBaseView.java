@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.ui.page;
+package com.bjz.jzappframe.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

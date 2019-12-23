@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.bjz.jzappframe.ui.page.JZBaseView;
+import com.bjz.jzappframe.ui.JZBaseView;
 import com.bjz.jzappframe.widget.titleChild.JZTitleRightIconGroup;
 import com.bjz.jzappframe.widget.titleChild.JZTitleRightTextGroup;
 
