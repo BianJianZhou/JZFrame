@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.bjz.jzappframe.ui.JZBaseView;
-import com.bjz.jzappframe.widget.titleChild.JZTitleRightIconGroup;
 import com.bjz.jzappframe.widget.titleChild.JZTitleRightTextGroup;
 
 /**
@@ -17,19 +15,13 @@ import com.bjz.jzappframe.widget.titleChild.JZTitleRightTextGroup;
  */
 /*
  类 说 明：
- 
+
  参数描述：
- 
- 
+
+
 */
-public abstract class JZTitleDataView extends JZBaseView<String> {
+public class JZTitleDataView extends RelativeLayout {
 
-    public static final String App_Title_Theme_Color_Drak = "App_Title_Theme_Color_Drak";
-    public static final String App_Title_Theme_Color_Tint = "App_Title_Theme_Color_Tint";
-    public static final String App_Title_Theme_Color_All = "App_Title_Theme_Color_All";
-
-    private JZTitleRightIconGroup
-            rightJiaoHuGroup;
     private JZTitleRightTextGroup
             rightTextGroup;
 
@@ -46,19 +38,6 @@ public abstract class JZTitleDataView extends JZBaseView<String> {
 
     public JZTitleDataView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public JZTitleRightIconGroup getRightJiaoHuGroup() {
-        return rightJiaoHuGroup;
-    }
-
-    public JZTitleDataView setRightJiaoHuGroup(JZTitleRightIconGroup rightJiaoHuGroup) {
-        if (rightJiaoHuGroup != null) {
-            rightGroupRl.removeView(rightJiaoHuGroup);
-        }
-        rightGroupRl.addView(rightJiaoHuGroup);
-        this.rightJiaoHuGroup = rightJiaoHuGroup;
-        return this;
     }
 
     public JZTitleRightTextGroup getRightTextGroup() {

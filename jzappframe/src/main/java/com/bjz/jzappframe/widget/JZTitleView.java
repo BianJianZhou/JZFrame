@@ -2,102 +2,120 @@ package com.bjz.jzappframe.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bjz.jzappframe.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+
+import com.bjz.jzappframe.JZUIFrameManager;
+import com.bjz.jzappframe.JZViewsConfigBuilder;
 import com.bjz.jzappframe.utils.JZPageAnimUtils;
 
-/**
- * ==================================
- * Created by 边江洲 on 2018/9/15.
- * 作    者：WY_BJZ
- * 创建时间：2018/9/15
- * ==================================
- */
-/*
- 类 说 明：
- 
- 参数描述：
- 
- 
-*/
 public class JZTitleView extends JZTitleDataView {
-    /* 底部分割线是否显示 */
-    boolean
-            isShowBottomHorView = true;
 
-    /* title文案 */
-    String
-            titleStr = "";
+    private Context context;
+    private JZViewsConfigBuilder viewsBuilder;
 
-    TextView
-            titleText,
-            backText;
+    /* x号按钮 */
+    private View xIconView;
 
-    RelativeLayout
-            bigRl,
-            backRl;
+    /* 返回按钮 */
+    private View backBtnView;
 
-    View
-            bottomHorView;
+    /* 标题文字 */
+    private TextView titleText;
 
-    RelativeLayout
-            closeText;
+    /* 底部横线 */
+    private View bottomHorLineView;
+
+    /* 关闭回调点击 */
+    private TMTitleCloseListener closeListener;
+
+    /* 返回点击回调 */
+    private TMTitleBackListener backListener;
 
     public JZTitleView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public JZTitleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public JZTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Base_TMTitleView);
-        if (ta != null) {
-            titleStr = ta.getString(R.styleable.Base_TMTitleView_titleText);
-            isShowBottomHorView = ta.getBoolean(R.styleable.Base_TMTitleView_bottomHorViewIsShow, false);
-            ta.recycle();
-        }
+        this.context = context;
+        viewsBuilder = JZUIFrameManager.getInstance().getViewsConfigBuilder();
+        initView();
+        setListener();
     }
 
-    @Override
-    public int getLayoutRes() {
-        return R.layout.base_title_view;
+    /**
+     * 初始化组件
+     */
+    private void initView() {
+        //设置最外层容器的宽高
+        LayoutParams groupParams = new LayoutParams(LayoutParams.MATCH_PARENT, viewsBuilder.getTitleViewH());
+        setLayoutParams(groupParams);
+        setGravity(Gravity.CENTER_VERTICAL);
+        /* 返回按键 */
+        backBtnView = new View(context);
+        LayoutParams backBtnViewParams = new LayoutParams(viewsBuilder.getBackBtnW(), viewsBuilder.getBackBtnH());
+        backBtnViewParams.setMargins(viewsBuilder.getBackBtnMarginLeft(), 0, 0, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            backBtnView.setBackground(new BitmapDrawable(viewsBuilder.getBackBtnBitmap()));
+        }
+        addView(backBtnView, backBtnViewParams);
+        /* 差号按钮 */
+        xIconView = new View(context);
+        RelativeLayout.LayoutParams xIconViewParams = new LayoutParams(viewsBuilder.getxIconW(), viewsBuilder.getxIconH());
+        backBtnViewParams.setMargins(viewsBuilder.getxIconMarginLeft(), 0, 0, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            xIconView.setBackground(new BitmapDrawable(viewsBuilder.getxIconBitmap()));
+        }
+        addView(xIconView, xIconViewParams);
+        xIconView.setVisibility(View.GONE);
+        /* titleText */
+        titleText = new TextView(context);
+        titleText.setTextSize(viewsBuilder.getTitleTextSize());
+        titleText.setTextColor(viewsBuilder.getTitleTextColor());
+        RelativeLayout.LayoutParams titleTextParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        titleTextParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        addView(titleText, titleTextParams);
+        /* 添加右侧容器 */
+        rightGroupRl = new RelativeLayout(context);
+        RelativeLayout.LayoutParams rightGrouRlParmas = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        rightGrouRlParmas.setMargins(0, 0, viewsBuilder.getRightGroupMarginRight(), 0);
+        addView(rightGroupRl, rightGrouRlParmas);
+        /* 底部横线 */
+        bottomHorLineView = new View(context);
+        RelativeLayout.LayoutParams horLineViewParams = new LayoutParams(LayoutParams.MATCH_PARENT, viewsBuilder.getBottomHorLineView());
+        horLineViewParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        addView(bottomHorLineView, horLineViewParams);
     }
 
-    @Override
-    public void bindView() {
-        backRl = bind(R.id.base_title_back_rl);
-        titleText = bind(R.id.base_title_text);
-        bigRl = bind(R.id.base_title_view_big_rl);
-        backText = bind(R.id.base_title_view_back_text);
-        closeText = bind(R.id.base_title_view_close_rl);
-
-        rightGroupRl = bind(R.id.base_title_view_right_group);
-        bottomHorView = bind(R.id.base_title_view_bottom_hor_view);
-
-        titleText.setText(titleStr);
-
-        if (isShowBottomHorView) {
-            bottomHorView.setVisibility(VISIBLE);
-        } else {
-            bottomHorView.setVisibility(GONE);
-        }
-
-        backRl.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (backListener != null) {
-                    backListener.back();
-                } else {
-                    if (mContext != null) {
-                        Activity activity = (Activity) mContext;
+    private void setListener() {
+        backBtnView.setOnClickListener(view -> {
+            if (backListener != null) {
+                backListener.back();
+            } else {
+                if (context != null) {
+                    if (context instanceof Activity) {
+                        Activity activity = (Activity) context;
+                        activity.finish();
+                        JZPageAnimUtils.finishActivityAnim(activity);
+                    } else if (context instanceof AppCompatActivity) {
+                        AppCompatActivity activity = (AppCompatActivity) context;
+                        activity.finish();
+                        JZPageAnimUtils.finishActivityAnim(activity);
+                    } else if (context instanceof FragmentActivity) {
+                        FragmentActivity activity = (FragmentActivity) context;
                         activity.finish();
                         JZPageAnimUtils.finishActivityAnim(activity);
                     }
@@ -105,14 +123,21 @@ public class JZTitleView extends JZTitleDataView {
             }
         });
 
-        closeText.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (closeListener != null) {
-                    closeListener.close();
-                } else {
-                    if (mContext != null) {
-                        Activity activity = (Activity) mContext;
+        xIconView.setOnClickListener(v -> {
+            if (closeListener != null) {
+                closeListener.close();
+            } else {
+                if (context != null) {
+                    if (context instanceof Activity) {
+                        Activity activity = (Activity) context;
+                        activity.finish();
+                        JZPageAnimUtils.finishActivityAnim(activity);
+                    } else if (context instanceof AppCompatActivity) {
+                        AppCompatActivity activity = (AppCompatActivity) context;
+                        activity.finish();
+                        JZPageAnimUtils.finishActivityAnim(activity);
+                    } else if (context instanceof FragmentActivity) {
+                        FragmentActivity activity = (FragmentActivity) context;
                         activity.finish();
                         JZPageAnimUtils.finishActivityAnim(activity);
                     }
@@ -121,95 +146,35 @@ public class JZTitleView extends JZTitleDataView {
         });
     }
 
-    public void setBackIsShow(boolean isShow) {
+    /* 设置差号是否显示 */
+    private void xIconIsShow(boolean isShow) {
         if (isShow) {
-            backRl.setVisibility(VISIBLE);
+            xIconView.setVisibility(View.VISIBLE);
         } else {
-            backRl.setVisibility(GONE);
+            xIconView.setVisibility(View.GONE);
         }
     }
 
-    @Override
-    public void setBackgroundColor(int color) {
-        bigRl.setBackgroundColor(color);
-    }
-
-    /* 这里设置的主题之后 相当于设置 bottomHorView 是否显示 属性不生效了 */
-    /* 设置当前title的主题模式 */
-    public JZTitleView setTheme(String theme) {
-        switch (theme) {
-            case App_Title_Theme_Color_Drak:
-                bigRl.setBackgroundColor(getResources().getColor(R.color._39414d));
-                backText.setBackgroundResource(R.mipmap.tm_back_write_icon);
-                titleText.setTextColor(getResources().getColor(R.color._ffffff));
-                bottomHorView.setBackgroundColor(getResources().getColor(R.color._39414d));
-                break;
-            case App_Title_Theme_Color_Tint:
-                bigRl.setBackgroundColor(getResources().getColor(R.color._ffffff));
-                backText.setBackgroundResource(R.mipmap.tm_back_black_icon);
-                titleText.setTextColor(getResources().getColor(R.color._39414d));
-                bottomHorView.setBackgroundColor(getResources().getColor(R.color._f4f4f4));
-                break;
-            case App_Title_Theme_Color_All:
-                break;
-            default:
-                break;
+    /* 设置标题 */
+    public void setTitle(String str) {
+        if (str != null) {
+            titleText.setText(str);
         }
-        return this;
-    }
-
-    /* 设置当前title的主题模式 */
-    public JZTitleView setContentTheme(String theme) {
-        switch (theme) {
-            case App_Title_Theme_Color_Drak:
-                backText.setBackgroundResource(R.mipmap.tm_back_write_icon);
-                titleText.setTextColor(getResources().getColor(R.color._ffffff));
-                bottomHorView.setBackgroundColor(getResources().getColor(R.color._39414d));
-                break;
-            case App_Title_Theme_Color_Tint:
-                backText.setBackgroundResource(R.mipmap.tm_back_black_icon);
-                titleText.setTextColor(getResources().getColor(R.color._39414d));
-                bottomHorView.setBackgroundColor(getResources().getColor(R.color._f4f4f4));
-                break;
-            case App_Title_Theme_Color_All:
-                break;
-            default:
-                break;
-        }
-        return this;
-    }
-
-    public JZTitleView setCloseTextVisible() {
-        closeText.setVisibility(VISIBLE);
-        return this;
-    }
-
-    /* 调用 setData() 方法赋值 title 字符*/
-    @Override
-    public void initView(String data) {
-        titleText.setText(data);
-    }
-
-
-    /* 获取右侧布局 */
-    public RelativeLayout getRightView() {
-        return rightGroupRl;
     }
 
     /* 设置底部横线是否显示 */
-    public JZTitleView setShowBottomHorView(boolean showBottomHorView) {
-        isShowBottomHorView = showBottomHorView;
-        if (showBottomHorView) {
-            bottomHorView.setVisibility(VISIBLE);
+    public JZTitleView setShowBottomHorView(boolean isShow) {
+        if (isShow) {
+            bottomHorLineView.setVisibility(VISIBLE);
         } else {
-            bottomHorView.setVisibility(GONE);
+            bottomHorLineView.setVisibility(GONE);
         }
         return this;
     }
 
     /* 设置底部横线背景色 */
     public JZTitleView setBottomHorViewBackground(int color) {
-        bottomHorView.setBackgroundColor(color);
+        bottomHorLineView.setBackgroundColor(color);
         return this;
     }
 
@@ -220,16 +185,11 @@ public class JZTitleView extends JZTitleDataView {
         return this;
     }
 
-    public void cancleAllRightContent() {
-        if (getRightJiaoHuGroup() != null) {
-            getRightJiaoHuGroup().removeAllViews();
-        }
+    public void clear() {
         if (getRightTextGroup() != null) {
             getRightTextGroup().removeAllViews();
         }
     }
-
-    TMTitleCloseListener closeListener;
 
     public interface TMTitleCloseListener {
         void close();
@@ -243,9 +203,12 @@ public class JZTitleView extends JZTitleDataView {
         return this;
     }
 
-    TMTitleBackListener backListener;
-
     public interface TMTitleBackListener {
         void back();
+    }
+
+    /* 获取右侧容器 */
+    public RelativeLayout getRightGroupView() {
+        return rightGroupRl;
     }
 }

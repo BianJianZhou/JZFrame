@@ -7,6 +7,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.bjz.jzappframe.JZUIFrameManager;
+import com.bjz.jzappframe.JZViewsConfigBuilder;
 import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.utils.JZLog;
 import com.bjz.jzappframe.widget.JZTextView;
@@ -32,9 +34,7 @@ public class JZTitleRightTextGroup extends LinearLayout {
 
     Context context;
 
-    int
-            itemTextPaddingLeft, itemTextPaddingRight,
-            itemViewPaddintLeft, itemViewPaddingRight;
+    JZViewsConfigBuilder viewsConfigBuilder;
 
     Map<String, JZTextView> itemMap = new HashMap<>();
 
@@ -48,16 +48,12 @@ public class JZTitleRightTextGroup extends LinearLayout {
 
     public JZTitleRightTextGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        viewsConfigBuilder = JZUIFrameManager.getInstance().getViewsConfigBuilder();
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
         setLayoutParams(params);
         setOrientation(HORIZONTAL);
         this.context = context;
-        itemTextPaddingLeft = (int) getResources().getDimension(R.dimen.dimens_12);
-        itemTextPaddingRight = (int) getResources().getDimension(R.dimen.dimens_12);
-        itemViewPaddintLeft = (int) getResources().getDimension(R.dimen.dimens_6);
-        itemViewPaddingRight = (int) getResources().getDimension(R.dimen.dimens_6);
-        setPadding(0, 0, (int) (getResources().getDimension(R.dimen.dimens_20) - itemTextPaddingRight), 0);
     }
 
     /*
@@ -67,7 +63,7 @@ public class JZTitleRightTextGroup extends LinearLayout {
       */
     public JZTitleRightTextGroup addItem_TextView(String itemContent, OnClickListener itemClickListener, JZTitleRightTextGroupItemParams... itemParam) {
         if (!itemMap.containsKey(itemContent)) {
-            JZTitleRightTextGroupItemParams textViewParams = new JZTitleRightTextGroupItemParams(context);
+            JZTitleRightTextGroupItemParams textViewParams = new JZTitleRightTextGroupItemParams();
             if (itemParam != null && itemParam.length != 0) {
                 textViewParams = itemParam[0];
             }
@@ -76,9 +72,13 @@ public class JZTitleRightTextGroup extends LinearLayout {
             params.gravity = Gravity.CENTER_VERTICAL;
             itemText.setLayoutParams(params);
             itemText.setTextSize(textViewParams.getSize());
-            itemText.setTextColor(Color.parseColor(textViewParams.getColor()));
+            itemText.setTextColor(textViewParams.getColor());
             itemText.setText(itemContent);
-            itemText.setPadding(itemTextPaddingLeft, 0, itemTextPaddingRight, 0);
+            itemText.setPadding(
+                    textViewParams.getItemTextPaddingLeft(),
+                    textViewParams.getItemTextPaddingTop(),
+                    textViewParams.getItemTextPaddingRight(),
+                    textViewParams.getItemTextPaddingBottom());
             itemMap.put(itemContent, itemText);
             addView(itemText);
             if (itemClickListener != null) {
@@ -88,20 +88,10 @@ public class JZTitleRightTextGroup extends LinearLayout {
         return this;
     }
 
-    public JZTitleRightTextGroup addItem_View(String itemColor) {
-        View itemText = new JZTextView(context);
-        LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.dimens_1), (int) getResources().getDimension(R.dimen.dimens_24));
-        itemText.setLayoutParams(params);
-        itemText.setPadding(itemViewPaddintLeft, 0, itemViewPaddingRight, 0);
-        itemText.setBackgroundColor(Color.parseColor(itemColor));
-        addView(itemText);
-        return this;
-    }
-
     public JZTitleRightTextGroup updateItem_TextView(String itemContent, JZTitleRightTextGroupItemParams itemParams) {
         if (itemMap.containsKey(itemContent)) {
             itemMap.get(itemContent).setTextSize(itemParams.getSize());
-            itemMap.get(itemContent).setTextColor(Color.parseColor(itemParams.getColor()));
+            itemMap.get(itemContent).setTextColor(itemParams.getColor());
         } else {
             JZLog.i("异常", getClass().getSimpleName() + " - updateItem_TextView - 不存在 -->" + itemContent);
         }

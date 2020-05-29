@@ -16,9 +16,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.bjz.jzappframe.IJZBaseView;
 import com.bjz.jzappframe.JZBasePresenter;
 import com.bjz.jzappframe.JZPageLeftCycle;
+import com.bjz.jzappframe.JZUIFrameManager;
+import com.bjz.jzappframe.JZViewsConfigBuilder;
 import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.bean.JZLoadingBean;
 import com.bjz.jzappframe.bean.JZPageData;
@@ -52,7 +56,7 @@ import java.util.Map;
 
 
 */
-public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends Activity implements IJZBaseView {
+public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends FragmentActivity implements IJZBaseView {
 
     /* 生命周期辅助类 */
     private JZPageLeftCycle pageLeftCycle;
@@ -93,13 +97,17 @@ public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends 
     /* 默认titleView */
     JZTitleView titleView;
 
+    private JZViewsConfigBuilder configBuilder;
+
     /* 设置title */
     public void setTitle(String titleStr) {
-        titleView.setData(titleStr);
+        titleView.setTitle(titleStr);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        /* 配置文件 */
+        configBuilder = JZUIFrameManager.getInstance().getViewsConfigBuilder();
         /* 生命周期辅助类 */
         pageLeftCycle = new JZPageLeftCycle();
         presenter = getPresenter();
@@ -160,9 +168,12 @@ public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends 
         /* 添加左侧点击遮盖布局 -- 用来做拖动页面退出操作 */
         leftClickCoverView = new View(this);
         /* 用来拦截此区域的点击事件 */
-        leftClickCoverView.setOnClickListener(v -> {
+        leftClickCoverView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
         });
-        bigGroupView.addView(leftClickCoverView, new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.dimens_20), RelativeLayout.LayoutParams.MATCH_PARENT));
+        bigGroupView.addView(leftClickCoverView, new RelativeLayout.LayoutParams(configBuilder.getScrollBackLeftW(), RelativeLayout.LayoutParams.MATCH_PARENT));
         /* 容器加载到 页面中 */
         setContentView(bigGroupView);
         /* 用来做虚拟物理按键的适配 */
