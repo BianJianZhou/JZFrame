@@ -23,7 +23,8 @@ dependencies {
 ## 使用说明  
 
 ## 版本说明  
-[![](https://jitpack.io/v/Mr-Bian/JZFrame.svg)](https://jitpack.io/#Mr-Bian/JZFrame)  
+[![](https://jitpack.io/v/Mr-Bian/JZFrame.svg)](https://jitpack.io/#Mr-Bian/JZFrame)
+###### v1.0.2 去掉屏幕适配dimens文件，添加初始化参数设置
 ###### v1.0.1 添加baseFragmentActivity
 ###### v1.0.0 首次发布APP开发使用的整体框架
 
