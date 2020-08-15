@@ -68,6 +68,7 @@ public class JZTitleView extends JZTitleDataView {
         backBtnView = new View(context);
         LayoutParams backBtnViewParams = new LayoutParams(viewsBuilder.getBackBtnW(), viewsBuilder.getBackBtnH());
         backBtnViewParams.setMargins(viewsBuilder.getBackBtnMarginLeft(), 0, 0, 0);
+        backBtnViewParams.addRule(RelativeLayout.CENTER_VERTICAL);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             backBtnView.setBackground(new BitmapDrawable(viewsBuilder.getBackBtnBitmap()));
         }
@@ -75,7 +76,8 @@ public class JZTitleView extends JZTitleDataView {
         /* 差号按钮 */
         xIconView = new View(context);
         RelativeLayout.LayoutParams xIconViewParams = new LayoutParams(viewsBuilder.getxIconW(), viewsBuilder.getxIconH());
-        backBtnViewParams.setMargins(viewsBuilder.getxIconMarginLeft(), 0, 0, 0);
+        xIconViewParams.setMargins(viewsBuilder.getxIconMarginLeft(), 0, 0, 0);
+        xIconViewParams.addRule(RelativeLayout.CENTER_VERTICAL);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             xIconView.setBackground(new BitmapDrawable(viewsBuilder.getxIconBitmap()));
         }
@@ -91,13 +93,15 @@ public class JZTitleView extends JZTitleDataView {
         /* 添加右侧容器 */
         rightGroupRl = new RelativeLayout(context);
         RelativeLayout.LayoutParams rightGrouRlParmas = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        rightGrouRlParmas.setMargins(0, 0, viewsBuilder.getRightGroupMarginRight(), 0);
+        rightGrouRlParmas.setMargins(0, 0, viewsBuilder.getTitleRightGroupMarginRight(), 0);
+        rightGrouRlParmas.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         addView(rightGroupRl, rightGrouRlParmas);
         /* 底部横线 */
         bottomHorLineView = new View(context);
-        RelativeLayout.LayoutParams horLineViewParams = new LayoutParams(LayoutParams.MATCH_PARENT, viewsBuilder.getBottomHorLineView());
+        RelativeLayout.LayoutParams horLineViewParams = new LayoutParams(LayoutParams.MATCH_PARENT, viewsBuilder.getTitleBottomHorLineViewH());
         horLineViewParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         addView(bottomHorLineView, horLineViewParams);
+        bottomHorLineView.setBackgroundColor(viewsBuilder.getTitleBottomHorLineColor());
     }
 
     private void setListener() {

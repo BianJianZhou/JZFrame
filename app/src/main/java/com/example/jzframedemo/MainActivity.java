@@ -3,6 +3,7 @@ package com.example.jzframedemo;
 import com.bjz.jzappframe.ui.JZBaseActivity;
 
 public class MainActivity extends JZBaseActivity<MainPresenter> {
+    private final String TAG = "MainActivity";
 
     @Override
     public int getResId() {
@@ -11,7 +12,7 @@ public class MainActivity extends JZBaseActivity<MainPresenter> {
 
     @Override
     public void initView() {
-
+        setTitle("MainActivity");
     }
 
     @Override

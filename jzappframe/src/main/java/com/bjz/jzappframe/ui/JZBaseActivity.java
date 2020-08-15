@@ -149,8 +149,8 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         /* 判断添加默认titleView */
         if (jzPageConfig.isAddTitleView()) {
             titleView = new JZTitleView(this);
-            RelativeLayout.LayoutParams titleViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            if (jzPageConfig.isAddTopView() && !jzPageConfig.isAddTitleView()) {
+            RelativeLayout.LayoutParams titleViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, configBuilder.getTitleViewH());
+            if (!jzPageConfig.isAddTopView() && jzPageConfig.isImersive()) {
                 titleViewParams.setMargins(0, JZUtil.getStatusBarHeight(this), 0, 0);
             }
             resViewGroupView.addView(titleView, titleViewParams);
@@ -379,7 +379,6 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         }
         return super.dispatchTouchEvent(ev);
     }
-
 
     private boolean isShouldHideInput(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {

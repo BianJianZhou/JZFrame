@@ -134,5 +134,7 @@ public class JZUtil {
         return sNavBarOverride;
     }
 
+    /* 资源id转化为bitmap */
+
 
 }

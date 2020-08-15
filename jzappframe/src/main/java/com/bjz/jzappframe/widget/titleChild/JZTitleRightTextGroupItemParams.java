@@ -1,11 +1,6 @@
 package com.bjz.jzappframe.widget.titleChild;
 
-import android.content.Context;
-import android.view.View;
-
 import com.bjz.jzappframe.JZUIFrameManager;
-import com.bjz.jzappframe.JZViewsConfigBuilder;
-import com.bjz.jzappframe.R;
 
 /**
  * ==================================
@@ -23,11 +18,11 @@ import com.bjz.jzappframe.R;
 */
 public class JZTitleRightTextGroupItemParams {
 
-    private int color = JZUIFrameManager.getInstance().getViewsConfigBuilder().getRightGroupTextColor();
-    private int size = JZUIFrameManager.getInstance().getViewsConfigBuilder().getRightGroupTextSize();
-    private int itemTextPaddingLeft = JZUIFrameManager.getInstance().getViewsConfigBuilder().getRightGroupItemSpace() / 2;
+    private int color = JZUIFrameManager.getInstance().getViewsConfigBuilder().getTitleRightGroupTextColor();
+    private int size = JZUIFrameManager.getInstance().getViewsConfigBuilder().getTitleRightGroupTextSize();
+    private int itemTextPaddingLeft = JZUIFrameManager.getInstance().getViewsConfigBuilder().getTitleRightGroupItemSpace() / 2;
     private int itemTextPaddingTop = 0;
-    private int itemTextPaddingRight = JZUIFrameManager.getInstance().getViewsConfigBuilder().getRightGroupItemSpace() / 2;
+    private int itemTextPaddingRight = JZUIFrameManager.getInstance().getViewsConfigBuilder().getTitleRightGroupItemSpace() / 2;
     private int itemTextPaddingBottom = 0;
 
     public JZTitleRightTextGroupItemParams setItemTextPadding(int left, int top, int right, int bottom) {

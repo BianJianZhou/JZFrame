@@ -12,10 +12,7 @@ public class JZSingleCallBack {
 
     private static Map<String, JZOneStatusCallBack> eventSaveMap = new HashMap<>();
 
-    public JZSingleCallBack(String verifyCode) {
-        if (!verifyCode.equals("fromJZEvents")) {
-            new RuntimeException("please use JZCallBack , Private use of this class is not allowed");
-        }
+    protected JZSingleCallBack() {
     }
 
     /* 这里的泛型是数据类型 */

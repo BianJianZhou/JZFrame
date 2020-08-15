@@ -2,15 +2,11 @@ package com.bjz.jzappframe;
 
 import android.graphics.Bitmap;
 
-import com.bjz.jzappframe.utils.JZCons;
 import com.bjz.jzappframe.utils.JZRuntimeException;
 
 public class JZViewsConfigBuilder {
 
-    public JZViewsConfigBuilder(String verifTag) {
-        if (!verifTag.equals(JZCons.VERIF_STR)) {
-            throw new JZRuntimeException("please use JZUIFrameManager.getInstance().getViewsConfigBuilder()");
-        }
+    protected JZViewsConfigBuilder() {
     }
 
     /* titleView配置 */
@@ -48,26 +44,26 @@ public class JZViewsConfigBuilder {
     private int titleTextColor;
 
     /* 右侧容器item间距 */
-    private int rightGroupItemSpace;
+    private int titleRightGroupItemSpace;
 
     /* 右侧容器item文字大小 */
-    private int rightGroupTextSize;
+    private int titleRightGroupTextSize;
 
     /* 右侧容器item文字色值(x0ffffff) */
-    private int rightGroupTextColor;
+    private int titleRightGroupTextColor;
 
     /* 右测容器距右距离 */
-    private int rightGroupMarginRight;
+    private int titleRightGroupMarginRight;
 
-    /* title底部横线view */
-    private int bottomHorLineView;
+    /* title底部横线view高度 */
+    private int titleBottomHorLineViewH;
+
+    /* title底部横线view颜色 */
+    private int titleBottomHorLineColor;
 
     /* 主界面配置 */
     /* 侧滑退出，手指点击左侧区域生效范围（宽度） */
     private int scrollBackLeftW;
-
-    /* 状态栏高度 */
-    private int statusBarH;
 
     /* 自定义toast高度 */
     private int customToastHeight;
@@ -82,13 +78,13 @@ public class JZViewsConfigBuilder {
         return this;
     }
 
-    public JZViewsConfigBuilder setBottomHorLineView(int bottomHorLineView) {
-        this.bottomHorLineView = bottomHorLineView;
+    public JZViewsConfigBuilder setTitleBottomHorLineViewH(int bottomHorLineView) {
+        this.titleBottomHorLineViewH = bottomHorLineView;
         return this;
     }
 
-    public JZViewsConfigBuilder setStatusBarH(int statusBarH) {
-        this.statusBarH = statusBarH;
+    public JZViewsConfigBuilder setTitleBottomHorLineColor(int titleBottomHorLineColor) {
+        this.titleBottomHorLineColor = titleBottomHorLineColor;
         return this;
     }
 
@@ -147,23 +143,23 @@ public class JZViewsConfigBuilder {
         return this;
     }
 
-    public JZViewsConfigBuilder setRightGroupItemSpace(int rightGroupItemSpace) {
-        this.rightGroupItemSpace = rightGroupItemSpace;
+    public JZViewsConfigBuilder setTitleRightGroupItemSpace(int rightGroupItemSpace) {
+        this.titleRightGroupItemSpace = rightGroupItemSpace;
         return this;
     }
 
-    public JZViewsConfigBuilder setRightGroupTextSize(int rightGroupTextSize) {
-        this.rightGroupTextSize = rightGroupTextSize;
+    public JZViewsConfigBuilder setTitleRightGroupTextSize(int rightGroupTextSize) {
+        this.titleRightGroupTextSize = rightGroupTextSize;
         return this;
     }
 
-    public JZViewsConfigBuilder setRightGroupTextColor(int rightGroupTextColor) {
-        this.rightGroupTextColor = rightGroupTextColor;
+    public JZViewsConfigBuilder setTitleRightGroupTextColor(int rightGroupTextColor) {
+        this.titleRightGroupTextColor = rightGroupTextColor;
         return this;
     }
 
-    public JZViewsConfigBuilder setRightGroupMarginRight(int rightGroupMarginRight) {
-        this.rightGroupMarginRight = rightGroupMarginRight;
+    public JZViewsConfigBuilder setTitleRightGroupMarginRight(int rightGroupMarginRight) {
+        this.titleRightGroupMarginRight = rightGroupMarginRight;
         return this;
     }
 
@@ -244,32 +240,32 @@ public class JZViewsConfigBuilder {
         return titleTextColor;
     }
 
-    public int getRightGroupItemSpace() {
-        if (rightGroupItemSpace == 0) {
-            throw new JZRuntimeException("please set rightGroupItemSpace");
+    public int getTitleRightGroupItemSpace() {
+        if (titleRightGroupItemSpace == 0) {
+            throw new JZRuntimeException("please set titleRightGroupItemSpace");
         }
-        return rightGroupItemSpace;
+        return titleRightGroupItemSpace;
     }
 
-    public int getRightGroupTextSize() {
-        if (rightGroupTextSize == 0) {
-            throw new JZRuntimeException("please set rightGroupTextSize");
+    public int getTitleRightGroupTextSize() {
+        if (titleRightGroupTextSize == 0) {
+            throw new JZRuntimeException("please set titleRightGroupTextSize");
         }
-        return rightGroupTextSize;
+        return titleRightGroupTextSize;
     }
 
-    public int getRightGroupTextColor() {
-        if (rightGroupTextColor == 0) {
-            throw new JZRuntimeException("please set rightGroupTextColor");
+    public int getTitleRightGroupTextColor() {
+        if (titleRightGroupTextColor == 0) {
+            throw new JZRuntimeException("please set titleRightGroupTextColor");
         }
-        return rightGroupTextColor;
+        return titleRightGroupTextColor;
     }
 
-    public int getRightGroupMarginRight() {
-        if (rightGroupMarginRight == 0) {
-            throw new JZRuntimeException("please set rightGroupMarginRight");
+    public int getTitleRightGroupMarginRight() {
+        if (titleRightGroupMarginRight == 0) {
+            throw new JZRuntimeException("please set titleRightGroupMarginRight");
         }
-        return rightGroupMarginRight;
+        return titleRightGroupMarginRight;
     }
 
     public int getScrollBackLeftW() {
@@ -279,18 +275,18 @@ public class JZViewsConfigBuilder {
         return scrollBackLeftW;
     }
 
-    public int getStatusBarH() {
-        if (statusBarH == 0) {
-            throw new JZRuntimeException("please set statusBarH");
+    public int getTitleBottomHorLineViewH() {
+        if (titleBottomHorLineViewH == 0) {
+            throw new JZRuntimeException("please set titleBottomHorLineViewH");
         }
-        return statusBarH;
+        return titleBottomHorLineViewH;
     }
 
-    public int getBottomHorLineView() {
-        if (bottomHorLineView == 0) {
-            throw new JZRuntimeException("please set bottomHorLineView");
+    public int getTitleBottomHorLineColor() {
+        if (titleBottomHorLineColor == 0) {
+            throw new JZRuntimeException("please set getTitleBottomHorLineColor");
         }
-        return bottomHorLineView;
+        return titleBottomHorLineColor;
     }
 
     public int getCustomToastHeight() {
