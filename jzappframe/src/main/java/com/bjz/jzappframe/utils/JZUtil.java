@@ -18,9 +18,9 @@ public class JZUtil {
         try {
             /* 获取类 ActivityThread activityThread */
             Class<?> activityThread = Class.forName("android.app.ActivityThread");
-            /* 调用 ActivityThread 中的静态方法 currentActivityThread() 获取实例 thread*/
+            /* 调用 ActivityThread 中的静态方法 currentActivityThread() 获取实例 MyThreadPoolExecutor*/
             Object thread = activityThread.getMethod("currentActivityThread").invoke(null);
-            /* 使用 ActivityThread 的实例 thread 调用 ActivityThread 类中的方法 getApplication() */
+            /* 使用 ActivityThread 的实例 MyThreadPoolExecutor 调用 ActivityThread 类中的方法 getApplication() */
             Object app = activityThread.getMethod("getApplication").invoke(thread);
             return (Application) app;
         } catch (ClassNotFoundException e) {

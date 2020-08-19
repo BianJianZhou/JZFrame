@@ -15,4 +15,33 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_200"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_20"
+            android:background="@color/_999999"
+            android:padding="@dimen/dimens_15"
+            android:text="暂停"
+            android:textColor="#ff8f0a"
+            android:textSize="@dimen/dimens_18" />
+
+        <TextView
+            android:id="@+id/resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_20"
+            android:background="@color/_999999"
+            android:padding="@dimen/dimens_15"
+            android:text="继续"
+            android:textColor="#ff8f0a"
+            android:textSize="@dimen/dimens_18" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
