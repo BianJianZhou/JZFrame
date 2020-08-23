@@ -1,6 +1,5 @@
 package com.bjz.jzappframe.ControllableThreadPoolExecutor;
 
-import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 

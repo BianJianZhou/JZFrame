@@ -28,11 +28,7 @@ public class JZPolymorphismCallBack {
      */
     public <T> T regist(String eventName, String callBackName, JZOneStatusCallBack<JZCallBackDataVo<T>> jzOneStatusCallBack) {
         if (eventSaveMap.containsKey(eventName)) {
-            if (eventSaveMap.get(eventName).containsKey(callBackName)) {
-                JZLog.e(TAG, "the callBackName: " + callBackName + " Has been registered");
-            } else {
-                eventSaveMap.get(eventName).put(callBackName, jzOneStatusCallBack);
-            }
+            eventSaveMap.get(eventName).put(callBackName, jzOneStatusCallBack);
         } else {
             Map<String, JZOneStatusCallBack> itemMap = new HashMap<>();
             itemMap.put(callBackName, jzOneStatusCallBack);
