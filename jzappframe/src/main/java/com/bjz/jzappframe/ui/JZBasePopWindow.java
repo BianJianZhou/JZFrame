@@ -18,7 +18,7 @@ import com.bjz.jzappframe.utils.JZToast;
  * Created by 边江洲 on 2017/10/10.
  */
 
-public abstract class WYBasePopWindow extends PopupWindow {
+public abstract class JZBasePopWindow extends PopupWindow {
 
     public Context context;
 
@@ -27,15 +27,15 @@ public abstract class WYBasePopWindow extends PopupWindow {
 
     public View view;
 
-    public WYBasePopWindow(Context context) {
+    public JZBasePopWindow(Context context) {
         this(context, null);
     }
 
-    public WYBasePopWindow(Context context, AttributeSet attrs) {
+    public JZBasePopWindow(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WYBasePopWindow(Context context, AttributeSet attrs, int defStyleAttr) {
+    public JZBasePopWindow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         init();
@@ -91,7 +91,7 @@ public abstract class WYBasePopWindow extends PopupWindow {
         void dissmissAfter();
     }
 
-    public WYBasePopWindow setPopDissmissAfterListener(PopDissmissAfterListener popDissmissAfterListener) {
+    public JZBasePopWindow setPopDissmissAfterListener(PopDissmissAfterListener popDissmissAfterListener) {
         this.popDissmissAfterListener = popDissmissAfterListener;
         return this;
     }
@@ -118,13 +118,13 @@ public abstract class WYBasePopWindow extends PopupWindow {
 
     public TMBasePopAffrimClickListener listener;
 
-    public WYBasePopWindow setTMBasePopAffrimClickListener(TMBasePopAffrimClickListener listener) {
+    public JZBasePopWindow setTMBasePopAffrimClickListener(TMBasePopAffrimClickListener listener) {
         this.listener = listener;
         return this;
     }
 
     public interface TMBasePopAffrimClickListener {
-        void affirm(String result1, String result2, String result3, String result4, String result5, String result6, String result7, WYBasePopWindow basePopWindow);
+        void affirm(String result1, String result2, String result3, String result4, String result5, String result6, String result7, JZBasePopWindow basePopWindow);
     }
 
     /**

@@ -1,8 +1,4 @@
-package com.bjz.jzappframe.ControllableThreadPoolExecutor;
-
-/**
- * Powered by 独舞丶这人生 on 2017/5/10.
- */
+package com.bjz.jzappframe.utils.customPausePoolExecutor1;
 
 /*
  * Written by Doug Lea with assistance from members of JCP JSR-166
@@ -19,7 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @since 1.5
  * @author Doug Lea
  */
-public interface RejectedExecutionHandler {
+public interface JZRejectedExecutionHandler {
 
     /**
      * Method that may be invoked by a {@link ThreadPoolExecutor} when
@@ -36,5 +32,5 @@ public interface RejectedExecutionHandler {
      * @param executor the executor attempting to execute this task
      * @throws RejectedExecutionException if there is no remedy
      */
-    void rejectedExecution(Runnable r, ControllableThreadPoolExecutor executor);
+    void rejectedExecution(Runnable r, JZControllableThreadPoolExecutor executor);
 }

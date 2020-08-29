@@ -1,6 +1,4 @@
-package com.bjz.jzappframe.ControllableThreadPoolExecutor;
-
-import android.nfc.Tag;
+package com.bjz.jzappframe.utils.customPausePoolExecutor1;
 
 import com.bjz.jzappframe.utils.JZLog;
 
@@ -26,9 +24,6 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * Powered by 独舞丶这人生 on 2017/5/10.
- */
 /*
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
@@ -314,16 +309,16 @@ import java.util.concurrent.locks.ReentrantLock;
  * the Executor uses finite bounds for both maximum threads and work queue
  * capacity, and is saturated.  In either case, the {@code execute} method
  * invokes the {@link
- * RejectedExecutionHandler#rejectedExecution(Runnable, ControllableThreadPoolExecutor)}
- * method of its {@link RejectedExecutionHandler}.  Four predefined handler
+ * JZRejectedExecutionHandler#rejectedExecution(Runnable, JZControllableThreadPoolExecutor)}
+ * method of its {@link JZRejectedExecutionHandler}.  Four predefined handler
  * policies are provided:
  * 方法{@link #execute（Runnable）}中提交的新任务将会
  *   当执行者被关闭时，还有时候，* <em>拒绝</ em>
  *   *执行者对最大线程和工作队列使用有限边界
  *   *容量，饱和。 在任一情况下，{@code execute}方法
  *   *调用{@link
- *   * RejectedExecutionHandler＃rejectedExecution（Runnable，ControllableThreadPoolExecutor）}
- *   *方法的{@link RejectedExecutionHandler}。 四个预定义的处理程序
+ *   * JZRejectedExecutionHandler＃rejectedExecution（Runnable，JZControllableThreadPoolExecutor）}
+ *   *方法的{@link JZRejectedExecutionHandler}。 四个预定义的处理程序
  *   *提供政策：
  * <ol>
  *
@@ -357,11 +352,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * </ol>
  * <p>
  * It is possible to define and use other kinds of {@link
- * RejectedExecutionHandler} classes. Doing so requires some care
+ * JZRejectedExecutionHandler} classes. Doing so requires some care
  * especially when policies are designed to work only under particular
  * capacity or queuing policies. </dd>
  * 可以定义和使用其他种类的{@link
- *   * RejectedExecutionHandler}类。 这样做需要一些照顾
+ *   * JZRejectedExecutionHandler}类。 这样做需要一些照顾
  *   *特别是当政策设计仅在特定情况下工作时
  *   *能力或排队政策。
  * <dt>Hook methods</dt>
@@ -432,12 +427,12 @@ import java.util.concurrent.locks.ReentrantLock;
  *   *覆盖一个或多个受保护的钩子方法。 例如，
  *   *这是一个添加一个简单的暂停/恢复功能的子类：
  * <pre> {@code
- * class PausableThreadPoolExecutor extends ThreadPoolExecutor {
+ * class JZPausableThreadPoolExecutor extends ThreadPoolExecutor {
  *   private boolean isPaused;
  *   private ReentrantLock pauseLock = new ReentrantLock();
  *   private Condition unpaused = pauseLock.newCondition();
  *
- *   public PausableThreadPoolExecutor(...) { super(...); }
+ *   public JZPausableThreadPoolExecutor(...) { super(...); }
  *
  *   protected void beforeExecute(Thread t, Runnable r) {
  *     super.beforeExecute(t, r);
@@ -474,8 +469,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Doug Lea
  * @since 1.5
  */
-public class ControllableThreadPoolExecutor extends AbstractExecutorService {
-    private final String TAG = "ControllableThreadPoolExecutor";
+public class JZControllableThreadPoolExecutor extends AbstractExecutorService {
+    private final String TAG = "JZControllableThreadPoolExecutor";
     /**
      * The main pool control state, ctl, is an atomic integer packing
      * two conceptual fields
@@ -787,7 +782,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * Handler called when saturated or shutdown in execute.
      * 处理程序在执行饱和或关闭时调用。
      */
-    private volatile RejectedExecutionHandler handler;
+    private volatile JZRejectedExecutionHandler handler;
 
     /**
      * Timeout in nanoseconds for idle threads waiting for work.
@@ -833,8 +828,8 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * The default rejected execution handler.
      * 默认拒绝的执行处理程序。
      */
-    private static final RejectedExecutionHandler defaultHandler =
-            (RejectedExecutionHandler) new AbortPolicy();
+    private static final JZRejectedExecutionHandler defaultHandler =
+            (JZRejectedExecutionHandler) new AbortPolicy();
 
     /**
      * Permission required for callers of shutdown and shutdownNow.
@@ -1732,11 +1727,11 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *                                  {@code maximumPoolSize < corePoolSize}
      * @throws NullPointerException     if {@code workQueue} is null
      */
-    public ControllableThreadPoolExecutor(int corePoolSize,
-                                          int maximumPoolSize,
-                                          long keepAliveTime,
-                                          TimeUnit unit,
-                                          BlockingQueue<Runnable> workQueue) {
+    public JZControllableThreadPoolExecutor(int corePoolSize,
+                                            int maximumPoolSize,
+                                            long keepAliveTime,
+                                            TimeUnit unit,
+                                            BlockingQueue<Runnable> workQueue) {
         this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
                 Executors.defaultThreadFactory(), defaultHandler);
     }
@@ -1789,12 +1784,12 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *                                       * @throws NullPointerException if {@code workQueue}
      *                                       *或{@code threadFactory}为空
      */
-    public ControllableThreadPoolExecutor(int corePoolSize,
-                                          int maximumPoolSize,
-                                          long keepAliveTime,
-                                          TimeUnit unit,
-                                          BlockingQueue<Runnable> workQueue,
-                                          ThreadFactory threadFactory) {
+    public JZControllableThreadPoolExecutor(int corePoolSize,
+                                            int maximumPoolSize,
+                                            long keepAliveTime,
+                                            TimeUnit unit,
+                                            BlockingQueue<Runnable> workQueue,
+                                            ThreadFactory threadFactory) {
         this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
                 threadFactory, defaultHandler);
     }
@@ -1847,12 +1842,12 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *                                       * @throws NullPointerException if {@code workQueue}
      *                                       *或{@code handler}为空
      */
-    public ControllableThreadPoolExecutor(int corePoolSize,
-                                          int maximumPoolSize,
-                                          long keepAliveTime,
-                                          TimeUnit unit,
-                                          BlockingQueue<Runnable> workQueue,
-                                          RejectedExecutionHandler handler) {
+    public JZControllableThreadPoolExecutor(int corePoolSize,
+                                            int maximumPoolSize,
+                                            long keepAliveTime,
+                                            TimeUnit unit,
+                                            BlockingQueue<Runnable> workQueue,
+                                            JZRejectedExecutionHandler handler) {
         this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
                 Executors.defaultThreadFactory(), handler);
     }
@@ -1909,13 +1904,13 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *                                       * @throws NullPointerException if {@code workQueue}
      *                                       *或{@code threadFactory}或{@code handler}为空
      */
-    public ControllableThreadPoolExecutor(int corePoolSize,
-                                          int maximumPoolSize,
-                                          long keepAliveTime,
-                                          TimeUnit unit,
-                                          BlockingQueue<Runnable> workQueue,
-                                          ThreadFactory threadFactory,
-                                          RejectedExecutionHandler handler) {
+    public JZControllableThreadPoolExecutor(int corePoolSize,
+                                            int maximumPoolSize,
+                                            long keepAliveTime,
+                                            TimeUnit unit,
+                                            BlockingQueue<Runnable> workQueue,
+                                            ThreadFactory threadFactory,
+                                            JZRejectedExecutionHandler handler) {
         if (corePoolSize < 0 ||
                 maximumPoolSize <= 0 ||
                 maximumPoolSize < corePoolSize ||
@@ -1937,22 +1932,22 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * <p>
      * If the task cannot be submitted for execution, either because this
      * executor has been shutdown or because its capacity has been reached,
-     * the task is handled by the current {@code RejectedExecutionHandler}.
+     * the task is handled by the current {@code JZRejectedExecutionHandler}.
      *
      * @param command the task to execute
      * @throws RejectedExecutionException at discretion of
-     *                                    {@code RejectedExecutionHandler}, if the task
+     *                                    {@code JZRejectedExecutionHandler}, if the task
      *                                    cannot be accepted for execution
      *                                    在将来某个时候执行给定的任务。 任务
      *                                          *可以在新线程或现有的合并线程中执行。
      *                                         *
      *                                          *如果任务无法提交执行，无论是因为这一点
      *                                          *执行人已经关闭或由于其能力已经达到，
-     *                                          *任务由当前的{@code RejectedExecutionHandler}处理。
+     *                                          *任务由当前的{@code JZRejectedExecutionHandler}处理。
      *                                         *
      *                                          * @param命令要执行的任务
      *                                          * @throws RejectedExecutionException由...决定
-     *                                          * {@code RejectedExecutionHandler}，如果任务
+     *                                          * {@code JZRejectedExecutionHandler}，如果任务
      *                                          *不能接受执行
      * @throws NullPointerException       if {@code command} is null
      */
@@ -2200,7 +2195,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *       * @throws NullPointerException如果handler为null
      *       * @see #getRejectedExecutionHandler
      */
-    public void setRejectedExecutionHandler(RejectedExecutionHandler handler) {
+    public void setRejectedExecutionHandler(JZRejectedExecutionHandler handler) {
         if (handler == null)
             throw new NullPointerException();
         this.handler = handler;
@@ -2213,9 +2208,9 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * 返回不可执行任务的当前处理程序。
      *      *
      *       * @返回当前处理程序
-     * @see #setRejectedExecutionHandler(RejectedExecutionHandler)
+     * @see #setRejectedExecutionHandler(JZRejectedExecutionHandler)
      */
-    public RejectedExecutionHandler getRejectedExecutionHandler() {
+    public JZRejectedExecutionHandler getRejectedExecutionHandler() {
         return handler;
     }
 
@@ -2909,7 +2904,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *       *除非执行人已经关闭，在这种情况下，任务
      *       *被丢弃。
      */
-    public static class CallerRunsPolicy implements RejectedExecutionHandler {
+    public static class CallerRunsPolicy implements JZRejectedExecutionHandler {
         /**
          * Creates a {@code CallerRunsPolicy}.
          */
@@ -2928,7 +2923,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
          *                    * @param r请求执行的可运行任务
          *                    * @param e执行者尝试执行此任务
          */
-        public void rejectedExecution(Runnable r, ControllableThreadPoolExecutor e) {
+        public void rejectedExecution(Runnable r, JZControllableThreadPoolExecutor e) {
             if (!e.isShutdown()) {
                 r.run();
             }
@@ -2941,7 +2936,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * 被拒绝的任务抛出一个处理程序
      *       * {@code RejectedExecutionException}。
      */
-    public static class AbortPolicy implements RejectedExecutionHandler {
+    public static class AbortPolicy implements JZRejectedExecutionHandler {
         /**
          * Creates an {@code AbortPolicy}.
          */
@@ -2960,7 +2955,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
          *                                              * @param e执行者尝试执行此任务
          *                                              * @throws总是拒绝执行ExecutionException
          */
-        public void rejectedExecution(Runnable r, ControllableThreadPoolExecutor e) {
+        public void rejectedExecution(Runnable r, JZControllableThreadPoolExecutor e) {
             throw new RejectedExecutionException("Task " + r.toString() +
                     " rejected from " +
                     e.toString());
@@ -2973,7 +2968,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      * 被拒绝的任务的处理程序静默地丢弃
      *       *拒绝任务
      */
-    public static class DiscardPolicy implements RejectedExecutionHandler {
+    public static class DiscardPolicy implements JZRejectedExecutionHandler {
         /**
          * Creates a {@code DiscardPolicy}.
          */
@@ -2990,7 +2985,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
          *                    * @param r请求执行的可运行任务
          *                    * @param e执行者尝试执行此任务
          */
-        public void rejectedExecution(Runnable r, ControllableThreadPoolExecutor e) {
+        public void rejectedExecution(Runnable r, JZControllableThreadPoolExecutor e) {
         }
     }
 
@@ -3002,7 +2997,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
      *       *请求，然后重试{@code execute}，除非执行者
      *       *被关闭，在这种情况下，任务被丢弃。
      */
-    public static class DiscardOldestPolicy implements RejectedExecutionHandler {
+    public static class DiscardOldestPolicy implements JZRejectedExecutionHandler {
         /**
          * Creates a {@code DiscardOldestPolicy} for the given executor.
          */
@@ -3025,7 +3020,7 @@ public class ControllableThreadPoolExecutor extends AbstractExecutorService {
          *                    * @param r请求执行的可运行任务
          *                    * @param e执行者尝试执行此任务
          */
-        public void rejectedExecution(Runnable r, ControllableThreadPoolExecutor e) {
+        public void rejectedExecution(Runnable r, JZControllableThreadPoolExecutor e) {
             if (!e.isShutdown()) {
                 e.getQueue().poll();
                 e.execute(r);
