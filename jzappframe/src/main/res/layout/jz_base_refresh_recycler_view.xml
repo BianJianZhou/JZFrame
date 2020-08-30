@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tm_base_recycler_view_big_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/base_recycler_view_bk_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <com.bjz.jzappframe.widget.refreshlayout.SmartRefreshLayout
+        android:id="@+id/base_recycler_view_refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableHeaderTranslationContent="true"
+        app:srlEnableLoadmore="true">
+
+        <com.bjz.jzappframe.widget.refreshlayout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlClassicsSpinnerStyle="FixedBehind" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/base_recycler_view_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.bjz.jzappframe.widget.refreshlayout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.bjz.jzappframe.widget.refreshlayout.SmartRefreshLayout>
+
+    <com.bjz.jzappframe.widget.recycler.other.JZBaseReccylerNoDataView
+        android:id="@+id/base_recycler_no_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -1,13 +1,46 @@
 package com.example.jzframedemo;
 
-import com.bjz.jzappframe.ControllableThreadPoolExecutor.MyRunnable;
-import com.bjz.jzappframe.ControllableThreadPoolExecutor.ThreadPoolUtil;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bjz.jzappframe.JZButterKnif.JZBindView;
+import com.bjz.jzappframe.JZButterKnif.JZButterKnif;
+import com.bjz.jzappframe.JZButterKnif.JZOnClick;
 import com.bjz.jzappframe.ui.JZBaseActivity;
-import com.bjz.jzappframe.utils.JZLog;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends JZBaseActivity<MainPresenter> {
     private final String TAG = "MainActivity";
+
+    @JZBindView(R.id.pause)
+    TextView pauseText;
+
+    @JZBindView(R.id.listview)
+    MyListView listview;
+
+    @JZOnClick({R.id.pause, R.id.resume})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.pause:
+                Toast.makeText(this, "pause", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.resume:
+                Toast.makeText(this, "resume", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @JZOnClick(R.id.hellow)
+    public void onClickxxx() {
+        Toast.makeText(this, "hellow", Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public int getResId() {
@@ -18,23 +51,18 @@ public class MainActivity extends JZBaseActivity<MainPresenter> {
     public void initView() {
         setTitle("MainActivity");
         Glide.with(this).pauseRequests();
+        JZButterKnif.bind(this);
+        pauseText.setText("asfd");
+        List<MyData> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            MyData myData = new MyData();
+            list.add(myData);
+        }
+        listview.setData(list);
     }
 
     @Override
     public void initData() {
-        for (int i = 0; i < 120; i++) {
-            ThreadPoolUtil.submit(new MyRunnable(i));
-        }
-        /* 暂停点击 */
-        findViewById(R.id.pause).setOnClickListener(v -> {
-            JZLog.d("检查", "暂停点击");
-            ThreadPoolUtil.pause();
-        });
-        /* 恢复点击 */
-        findViewById(R.id.resume).setOnClickListener(v -> {
-            JZLog.d("检查", "恢复点击");
-            ThreadPoolUtil.resume();
-        });
     }
 
     @Override

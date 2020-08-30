@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tm_base_recycler_view_big_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/base_recycler_view_bk_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/base_recycler_view_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.bjz.jzappframe.widget.recycler.other.JZBaseReccylerNoDataView
+        android:id="@+id/base_recycler_no_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</RelativeLayout>

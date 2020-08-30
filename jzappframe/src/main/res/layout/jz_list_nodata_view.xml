@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_nodata_big_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="41" />
+
+    <TextView
+        android:id="@+id/list_no_data_fial_icon_text"
+        android:layout_width="80dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/jz_no_data_icon" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15" />
+
+    <TextView
+        android:id="@+id/list_no_data_view_fail_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="暂时没内容呦"
+        android:textColor="#cccccc"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30" />
+
+    <TextView
+        android:id="@+id/list_no_data_view_btn_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/jz_cccccc_stoke_yuan_bk"
+        android:maxLength="7"
+        android:paddingLeft="15dp"
+        android:paddingTop="6dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="6dp"
+        android:text=""
+        android:textColor="#cccccc"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="81" />
+</LinearLayout>
