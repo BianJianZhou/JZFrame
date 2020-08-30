@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.widget;
+package com.bjz.jzappframe.widget.title;
 
 import android.app.Activity;
 import android.content.Context;

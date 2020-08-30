@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.widget;
+package com.bjz.jzappframe.widget.title;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

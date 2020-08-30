@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.widget.titleChild;
+package com.bjz.jzappframe.widget.title.titleChild;
 
 import com.bjz.jzappframe.JZUIFrameManager;
 

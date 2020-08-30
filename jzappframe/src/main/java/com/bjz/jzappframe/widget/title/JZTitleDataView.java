@@ -1,10 +1,10 @@
-package com.bjz.jzappframe.widget;
+package com.bjz.jzappframe.widget.title;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.bjz.jzappframe.widget.titleChild.JZTitleRightTextGroup;
+import com.bjz.jzappframe.widget.title.titleChild.JZTitleRightTextGroup;
 
 /**
  * ==================================

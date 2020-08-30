@@ -32,7 +32,7 @@ import com.bjz.jzappframe.utils.JZPageConfig;
 import com.bjz.jzappframe.utils.JZToast;
 import com.bjz.jzappframe.utils.JZUtil;
 import com.bjz.jzappframe.utils.stateBar.ImmersionBar;
-import com.bjz.jzappframe.widget.JZTitleView;
+import com.bjz.jzappframe.widget.title.JZTitleView;
 
 import java.io.Serializable;
 import java.util.HashMap;

@@ -3,7 +3,6 @@ package com.bjz.jzappframe.JZButterKnif;
 import android.app.Activity;
 import android.view.View;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * 运行时注解，只支持遍历本类方法
  * 只支持本类配置
- * 添加 OnClick 注解的方法支持没有参数或者一个参数传 View
+ * 添加 JZOnClick 注解的方法支持没有参数或者一个参数传 View
  */
 public class JZButterKnif {
 
@@ -39,7 +38,7 @@ public class JZButterKnif {
                         continue;
                     }
                     /* 获取该元素上存在的指定类型的注解 */
-                    BindView bindViewAnnotation = field.getAnnotation(BindView.class);
+                    JZBindView bindViewAnnotation = field.getAnnotation(JZBindView.class);
                     /* 判断是否为空 */
                     if (bindViewAnnotation != null) {
                         /* 获取元素上注解的值 */
@@ -56,11 +55,11 @@ public class JZButterKnif {
         /* 配置点击事件 */
         /* 获取本类所有方法 */
         Method[] methods = parentClass.getDeclaredMethods();
-        /* 过滤添加 OnClick 注解的方法 */
+        /* 过滤添加 JZOnClick 注解的方法 */
         if (methods != null && methods.length > 0) {
             for (Method method : methods) {
                 /* 获取该方法上存在的指定类型的注解 */
-                OnClick onClickMethodAnnotation = method.getAnnotation(OnClick.class);
+                JZOnClick onClickMethodAnnotation = method.getAnnotation(JZOnClick.class);
                 /* 判断 方法指定注解是否存在及 值长度不为0 */
                 if (onClickMethodAnnotation != null && onClickMethodAnnotation.value() != null && onClickMethodAnnotation.value().length != 0) {
                     /* 为添加了Onclick注解的方法配置点击事件 */

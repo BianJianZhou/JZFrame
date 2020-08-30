@@ -1,17 +1,14 @@
-package com.bjz.jzappframe.widget.titleChild;
+package com.bjz.jzappframe.widget.title.titleChild;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.bjz.jzappframe.JZUIFrameManager;
 import com.bjz.jzappframe.JZViewsConfigBuilder;
-import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.utils.JZLog;
-import com.bjz.jzappframe.widget.JZTextView;
+import com.bjz.jzappframe.widget.title.JZTextView;
 
 import java.util.HashMap;
 import java.util.Map;
