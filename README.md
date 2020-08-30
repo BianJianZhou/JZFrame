@@ -24,6 +24,7 @@ dependencies {
 
 ## 版本说明  
 [![](https://jitpack.io/v/Mr-Bian/JZFrame.svg)](https://jitpack.io/#Mr-Bian/JZFrame)
+###### v1.0.4 添加智能recycler小框架
 ###### v1.0.3 添加框架整体尺寸配置及添加两项小功能
 ###### v1.0.2 去掉屏幕适配dimens文件，添加初始化参数设置
 ###### v1.0.1 添加baseFragmentActivity
