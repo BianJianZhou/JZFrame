@@ -1,28 +1,29 @@
-package com.bjz.jzappframe.widget.recycler.recycler;
+package com.bjz.jzappframe.widget.recycler;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
-import com.wy.viewFrame.R;
-import com.wy.viewFrame.util.Diction;
-import com.wy.viewFrame.wyRecycler.base.TMBaseView;
-import com.wy.viewFrame.wyRecycler.api.ITMBaseRefreshRecycler;
-import com.wy.viewFrame.wyRecycler.listener.ITMRequestListDataListener;
-import com.wy.viewFrame.wyRecycler.listener.IWYRefreshPullListener;
-import com.wy.viewFrame.util.WYToast;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bjz.jzappframe.R;
+import com.bjz.jzappframe.utils.JZToast;
+import com.bjz.jzappframe.widget.recycler.api.IJZBaseRefreshRecycler;
+import com.bjz.jzappframe.widget.recycler.base.JZBaseView;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRequestListDataListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRefreshPullListener;
+import com.bjz.jzappframe.widget.recycler.util.JZDiction;
+import com.bjz.jzappframe.widget.refreshlayout.api.RefreshFooter;
+import com.bjz.jzappframe.widget.refreshlayout.api.RefreshHeader;
+import com.bjz.jzappframe.widget.refreshlayout.api.RefreshLayout;
+import com.bjz.jzappframe.widget.refreshlayout.constant.RefreshState;
+import com.bjz.jzappframe.widget.refreshlayout.constant.SpinnerStyle;
+import com.bjz.jzappframe.widget.refreshlayout.header.ClassicsHeader;
+import com.bjz.jzappframe.widget.refreshlayout.listener.OnMultiPurposeListener;
+import com.bjz.jzappframe.widget.refreshlayout.listener.OnRefreshLoadmoreListener;
 
 import java.util.Collection;
 
@@ -43,9 +44,9 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
 
     private RefreshLayout mRefreshLayout;
     private ClassicsHeader mClassicsHeader;
-    ITMRequestListDataListener requestDataListener;
+    IJZRequestListDataListener requestDataListener;
 
-    private TMBaseView headView = null;
+    private JZBaseView headView = null;
 
     /* 刷新加载动画持续的时间 */
     private long animTime = 300;
@@ -67,7 +68,7 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.tm_base_refresh_recycler_view;
+        return R.layout.jz_base_refresh_recycler_view;
     }
 
     @Override
@@ -145,9 +146,9 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 page = 1;
-                adapterState = Diction.AdapterState.AdapterRefresh;
+                adapterState = JZDiction.AdapterState.AdapterRefresh;
                 if (requestDataListener != null) {
-                    requestDataListener.requestData(page, Diction.AdapterState.AdapterRefresh);
+                    requestDataListener.requestData(page, JZDiction.AdapterState.AdapterRefresh);
                 }
                 handler.removeMessages(0);
                 handler.sendEmptyMessageDelayed(0, 5000);
@@ -159,12 +160,12 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 page++;
-                adapterState = Diction.AdapterState.AdapterLoadMore;
+                adapterState = JZDiction.AdapterState.AdapterLoadMore;
                 if (requestDataListener != null) {
                     if (page == 1) {
                         page++;
                     }
-                    requestDataListener.requestData(page, Diction.AdapterState.AdapterLoadMore);
+                    requestDataListener.requestData(page, JZDiction.AdapterState.AdapterLoadMore);
                 }
                 handler.removeMessages(0);
                 handler.sendEmptyMessageDelayed(0, 5000);
@@ -176,12 +177,12 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
             @Override
             public void onLoadMore() {
                 page++;
-                adapterState = Diction.AdapterState.AdapterLoadMore;
+                adapterState = JZDiction.AdapterState.AdapterLoadMore;
                 if (requestDataListener != null) {
                     if (page == 1) {
                         page++;
                     }
-                    requestDataListener.requestData(page, Diction.AdapterState.AdapterLoadMore);
+                    requestDataListener.requestData(page, JZDiction.AdapterState.AdapterLoadMore);
                 }
             }
         });
@@ -267,12 +268,12 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                     mRefreshLayout.getLayout().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            WYToast.showShortToast(context, "暂时没有新的内容呦");
-                            if (adapterState == Diction.AdapterState.AdapterRefresh) {
+                            JZToast.showShortToast(context, "暂时没有新的内容呦");
+                            if (adapterState == JZDiction.AdapterState.AdapterRefresh) {
                                 mRefreshLayout.getLayout().post(() -> {
                                     mRefreshLayout.finishRefresh();
                                 });
-                            } else if (adapterState == Diction.AdapterState.AdapterLoadMore) {
+                            } else if (adapterState == JZDiction.AdapterState.AdapterLoadMore) {
                                 mRefreshLayout.getLayout().post(() -> {
                                     mRefreshLayout.finishLoadmore();
                                 });
@@ -306,7 +307,7 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                 }
             } else {
                 switch (adapterState) {
-                    case Diction.AdapterState.AdapterRefresh:
+                    case JZDiction.AdapterState.AdapterRefresh:
                         if (datas != null && datas.size() > 0) {
                             adapter.refresh(datas);
                         }
@@ -319,10 +320,10 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                             }
                         }
                         break;
-                    case Diction.AdapterState.AdapterLoadMore:
+                    case JZDiction.AdapterState.AdapterLoadMore:
                         adapter.loadmore(datas);
                         if (datas.size() == 0) {
-                            WYToast.showShortToast(context, "亲，没有更多数据了");
+                            JZToast.showShortToast(context, "亲，没有更多数据了");
                             if (startIsOpenLoadMore) {
                                 if (datas.size() < maxOnceSetDataNum) {
                                     mRefreshLayout.setEnableLoadmore(false);
@@ -335,7 +336,7 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                     default:
                         break;
                 }
-                if (datas.size() == 0 && page > 1 && Diction.AdapterState.AdapterLoadMore.equals(adapterState)) {
+                if (datas.size() == 0 && page > 1 && JZDiction.AdapterState.AdapterLoadMore.equals(adapterState)) {
                     page--;
                 }
             }
@@ -362,7 +363,7 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                 }
             } else {
                 switch (adapterState) {
-                    case Diction.AdapterState.AdapterRefresh:
+                    case JZDiction.AdapterState.AdapterRefresh:
                         if (datas != null) {
                             adapter.refresh(datas);
                         }
@@ -375,10 +376,10 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                             }
                         }
                         break;
-                    case Diction.AdapterState.AdapterLoadMore:
+                    case JZDiction.AdapterState.AdapterLoadMore:
                         adapter.loadmore(datas);
                         if (datas.size() == 0) {
-                            WYToast.showShortToast(context, "亲，没有更多数据了");
+                            JZToast.showShortToast(context, "亲，没有更多数据了");
                             if (startIsOpenLoadMore) {
                                 if (datas.size() < maxOnceSetDataNum) {
                                     mRefreshLayout.setEnableLoadmore(false);
@@ -391,7 +392,7 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
                     default:
                         break;
                 }
-                if (datas.size() == 0 && page > 1 && Diction.AdapterState.AdapterLoadMore.equals(adapterState)) {
+                if (datas.size() == 0 && page > 1 && JZDiction.AdapterState.AdapterLoadMore.equals(adapterState)) {
                     page--;
                 }
             }
@@ -401,73 +402,73 @@ public abstract class JZRefreshRecycler<T> extends JZBaseRecycler<T> {
     /* 列表状态初始化 */
     /* 刷新 recycler 专属 */
     private void recyclerStateRestart() {
-        if (adapterState == Diction.AdapterState.AdapterRefresh) {
+        if (adapterState == JZDiction.AdapterState.AdapterRefresh) {
             mRefreshLayout.finishRefresh();
-        } else if (adapterState == Diction.AdapterState.AdapterLoadMore) {
+        } else if (adapterState == JZDiction.AdapterState.AdapterLoadMore) {
             mRefreshLayout.finishLoadmore();
         }
         isRequestSuccess = true;
         handler.removeMessages(0);
     }
 
-    IWYRefreshPullListener refreshPullListener;
+    IJZRefreshPullListener refreshPullListener;
 
     /* 刷新组件拖拽监听 */
-    public ITMBaseRefreshRecycler setRefreshPullListener(IWYRefreshPullListener refreshPullListener) {
+    public IJZBaseRefreshRecycler setRefreshPullListener(IJZRefreshPullListener refreshPullListener) {
         this.refreshPullListener = refreshPullListener;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setRequestListDataListener(ITMRequestListDataListener listener) {
+    public IJZBaseRefreshRecycler setRequestListDataListener(IJZRequestListDataListener listener) {
         this.requestDataListener = listener;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setRefreshHeadBkColor(int color) {
+    public IJZBaseRefreshRecycler setRefreshHeadBkColor(int color) {
         mClassicsHeader.setBackgroundColor(color);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setRefreshHeadContentColor(int color) {
+    public IJZBaseRefreshRecycler setRefreshHeadContentColor(int color) {
         mClassicsHeader.setAccentColor(color);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setEnableLoadMore(boolean isLoadMore) {
+    public IJZBaseRefreshRecycler setEnableLoadMore(boolean isLoadMore) {
         startIsOpenLoadMore = isLoadMore;
         mRefreshLayout.setEnableLoadmore(isLoadMore);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setEnableRefresh(boolean isRefresh) {
+    public IJZBaseRefreshRecycler setEnableRefresh(boolean isRefresh) {
         mRefreshLayout.setEnableRefresh(isRefresh);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setHeadViewRefreshStyle(SpinnerStyle type) {
+    public IJZBaseRefreshRecycler setHeadViewRefreshStyle(SpinnerStyle type) {
         mClassicsHeader.setSpinnerStyle(SpinnerStyle.Scale);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler autoRefresh() {
+    public IJZBaseRefreshRecycler autoRefresh() {
         mRefreshLayout.autoRefresh();
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler autoLoadMore() {
+    public IJZBaseRefreshRecycler autoLoadMore() {
         mRefreshLayout.autoLoadmore();
         return this;
     }
 
-    public ITMBaseRefreshRecycler setRefreshAndLoadMoreAnimTime(long time) {
+    public IJZBaseRefreshRecycler setRefreshAndLoadMoreAnimTime(long time) {
         this.animTime = time;
         return this;
     }

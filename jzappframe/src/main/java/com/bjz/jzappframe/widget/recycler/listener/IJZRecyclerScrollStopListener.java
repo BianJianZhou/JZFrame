@@ -1,6 +1,6 @@
 package com.bjz.jzappframe.widget.recycler.listener;
 
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  * ==================================

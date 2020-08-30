@@ -1,8 +1,6 @@
-package com.bjz.jzappframe.widget.recycler.recycler;
+package com.bjz.jzappframe.widget.recycler;
 
 import android.content.Context;
-import android.support.annotation.ColorRes;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +8,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.wy.viewFrame.R;
-import com.wy.viewFrame.util.Diction;
-import com.wy.viewFrame.wyRecycler.api.ITMBaseRefreshRecycler;
-import com.wy.viewFrame.wyRecycler.base.TMBaseView;
-import com.wy.viewFrame.wyRecycler.base.TMBaseViewHolderFromRecycler;
-import com.wy.viewFrame.wyRecycler.other.TMBaseReccylerNoDataView;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerItemClickListner;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerNoDataBtnClickListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollFristChildChangeListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollOrientationListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollStopListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRequestListDataListener;
-import com.wy.viewFrame.util.LogUtils;
+import androidx.annotation.ColorRes;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bjz.jzappframe.R;
+import com.bjz.jzappframe.utils.JZLog;
+import com.bjz.jzappframe.widget.recycler.api.IJZBaseRefreshRecycler;
+import com.bjz.jzappframe.widget.recycler.base.JZBaseView;
+import com.bjz.jzappframe.widget.recycler.base.JZBaseViewHolderFromRecycler;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerItemClickListner;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerNoDataBtnClickListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollFristChildChangeListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollOrientationListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollStopListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRequestListDataListener;
+import com.bjz.jzappframe.widget.recycler.other.JZBaseReccylerNoDataView;
+import com.bjz.jzappframe.widget.recycler.util.JZDiction;
+import com.bjz.jzappframe.widget.refreshlayout.constant.SpinnerStyle;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,23 +41,23 @@ import java.util.List;
  .setPage(1)
 
   */
-public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBaseRefreshRecycler<T> {
+public abstract class JZBaseRecycler<T> extends RelativeLayout implements IJZBaseRefreshRecycler<T> {
 
     /* 无数据按钮点击监听 */
-    ITMRecyclerNoDataBtnClickListener noDataBtnClickListener;
+    IJZRecyclerNoDataBtnClickListener noDataBtnClickListener;
     /* 滑动中第一个显示的item的position和据地顶部位置改变监听 */
-    public ITMRecyclerScrollFristChildChangeListener fristChildChangeListener;
+    public IJZRecyclerScrollFristChildChangeListener fristChildChangeListener;
     /* 滑动停止监听 */
-    public ITMRecyclerScrollStopListener scrollStopListener;
+    public IJZRecyclerScrollStopListener scrollStopListener;
     /* 滑动方向监听 */
-    public ITMRecyclerScrollOrientationListener scrollListener;
+    public IJZRecyclerScrollOrientationListener scrollListener;
     /* 一次请求数据的量 */
     public int maxOnceSetDataNum = 20;
 
     public Context context;
     View itemView;
     public RecyclerView recyclerView;
-    public ITMRecyclerItemClickListner itemClickListner;
+    public IJZRecyclerItemClickListner itemClickListner;
     private RelativeLayout bigRl;
 
     /* 当前点击的item 的postion */
@@ -68,12 +69,12 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
 
     public MyAdapter adapter;
 
-    public String adapterState = Diction.AdapterState.AdapterRefresh;
+    public String adapterState = JZDiction.AdapterState.AdapterRefresh;
 
     /* 背景图view */
     private ImageView bkImg;
 
-    private TMBaseReccylerNoDataView noDataView;
+    private JZBaseReccylerNoDataView noDataView;
 
     public JZBaseRecycler(Context context) {
         this(context, null);
@@ -90,7 +91,7 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
         initView();
     }
 
-    public ITMBaseRefreshRecycler setMaxOnceSetDataNum(int maxOnceSetDataNum) {
+    public IJZBaseRefreshRecycler setMaxOnceSetDataNum(int maxOnceSetDataNum) {
         this.maxOnceSetDataNum = maxOnceSetDataNum;
         return null;
     }
@@ -98,12 +99,12 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     /* 初始化 */
     public void initView() {
         if (getLayoutResId() == 0) {
-            LogUtils.d("检查", "recyclerBase_id为空");
+            JZLog.d("检查", "recyclerBase_id为空");
             return;
         }
         itemView = LayoutInflater.from(context).inflate(getLayoutResId(), this, false);
         addView(itemView);
-        adapterState = Diction.AdapterState.AdapterRefresh;
+        adapterState = JZDiction.AdapterState.AdapterRefresh;
         recyclerView = bind(R.id.base_recycler_view_recycler);
         noDataView = bind(R.id.base_recycler_no_data_view);
 
@@ -130,7 +131,7 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     }
 
     /* recycler的适配器 */
-    public class MyAdapter extends RecyclerView.Adapter<TMBaseViewHolderFromRecycler> {
+    public class MyAdapter extends RecyclerView.Adapter<JZBaseViewHolderFromRecycler> {
 
         List<T> datas;
 
@@ -180,12 +181,12 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
         }
 
         @Override
-        public TMBaseViewHolderFromRecycler onCreateViewHolder(ViewGroup parent, int viewType) {
+        public JZBaseViewHolderFromRecycler onCreateViewHolder(ViewGroup parent, int viewType) {
             return getViewHolder(parent, viewType);
         }
 
         @Override
-        public void onBindViewHolder(TMBaseViewHolderFromRecycler holder, int position) {
+        public void onBindViewHolder(JZBaseViewHolderFromRecycler holder, int position) {
             initItemView(holder, position, datas, getItemViewType(position));
             if (holder != null && holder.baseItemView != null)
                 holder.baseItemView.setOnClickListener(view -> {
@@ -215,13 +216,13 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     }
 
     @Override
-    public ITMBaseRefreshRecycler setLayoutManager(RecyclerView.LayoutManager manager) {
+    public IJZBaseRefreshRecycler setLayoutManager(RecyclerView.LayoutManager manager) {
         recyclerView.setLayoutManager(manager);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setListType(String type) {
+    public IJZBaseRefreshRecycler setListType(String type) {
         this.listType = type;
         return this;
     }
@@ -231,12 +232,12 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     }
 
     @Override
-    public void setItemClickListener(ITMRecyclerItemClickListner<TMBaseView, T> listener) {
+    public void setItemClickListener(IJZRecyclerItemClickListner<JZBaseView, T> listener) {
         this.itemClickListner = listener;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setBaseRecyclerLayoutParams(ViewGroup.LayoutParams params) {
+    public IJZBaseRefreshRecycler setBaseRecyclerLayoutParams(ViewGroup.LayoutParams params) {
         bigRl.setLayoutParams(params);
         return this;
     }
@@ -246,33 +247,33 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
      * 并且同时调用 setAdapterState(TMCon.AdapterState.AdapterRefresh)
       * */
     @Override
-    public ITMBaseRefreshRecycler setPage(int page) {
+    public IJZBaseRefreshRecycler setPage(int page) {
         this.page = page;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler onlyRefresh() {
+    public IJZBaseRefreshRecycler onlyRefresh() {
         if (adapter != null)
             adapter.notifyDataSetChanged();
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setAdapterState(String adapterState) {
+    public IJZBaseRefreshRecycler setAdapterState(String adapterState) {
         this.adapterState = adapterState;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler refresh(Collection<T> datas) {
+    public IJZBaseRefreshRecycler refresh(Collection<T> datas) {
         if (adapter != null) adapter.refresh(datas);
         return this;
     }
 
     /* 刷新单条数据 */
     @Override
-    public ITMBaseRefreshRecycler refreshItem(T data, int position) {
+    public IJZBaseRefreshRecycler refreshItem(T data, int position) {
         if (adapter != null) adapter.refreshItem(data, position);
         return this;
     }
@@ -283,25 +284,25 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     }
 
     @Override
-    public ITMBaseRefreshRecycler setDataChangePosition(int position) {
+    public IJZBaseRefreshRecycler setDataChangePosition(int position) {
         this.dataChangePosition = position;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler loadMore(Collection<T> datas) {
+    public IJZBaseRefreshRecycler loadMore(Collection<T> datas) {
         if (adapter != null) adapter.loadmore(datas);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler addItem(int position, T data) {
+    public IJZBaseRefreshRecycler addItem(int position, T data) {
         if (adapter != null) adapter.addItem(position, data);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler removeItem(int position) {
+    public IJZBaseRefreshRecycler removeItem(int position) {
         if (adapter != null) adapter.removeItem(position);
         return this;
     }
@@ -315,14 +316,14 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     /* *****************************************************************基础配ui相关************************************************************* */
     /* 设置列表背景图片 resId */
     @Override
-    public ITMBaseRefreshRecycler setBkImgUrl(int imgResId) {
+    public IJZBaseRefreshRecycler setBkImgUrl(int imgResId) {
         bkImg.setBackgroundResource(imgResId);
         return this;
     }
 
     /* 设置最外层背景色 */
     @Override
-    public ITMBaseRefreshRecycler setOuterMostLayerBkColor(@ColorRes int colorRes) {
+    public IJZBaseRefreshRecycler setOuterMostLayerBkColor(@ColorRes int colorRes) {
         bigRl.setBackgroundResource(colorRes);
         return this;
     }
@@ -344,43 +345,43 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataStr(String noDataTopStr, String noDataBottomStr) {
+    public IJZBaseRefreshRecycler setNoDataStr(String noDataTopStr, String noDataBottomStr) {
         noDataView.setNoDataStr(noDataTopStr, noDataBottomStr);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataViewIsShow(boolean noDataViewIsShow) {
+    public IJZBaseRefreshRecycler setNoDataViewIsShow(boolean noDataViewIsShow) {
         this.noDataViewIsShow = noDataViewIsShow;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataBtnContentStr(String btnStr) {
+    public IJZBaseRefreshRecycler setNoDataBtnContentStr(String btnStr) {
         noDataView.setNoDataBtnContentStr(btnStr);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataBkColor(int bkColor) {
+    public IJZBaseRefreshRecycler setNoDataBkColor(int bkColor) {
         noDataView.setNoDataBkColor(bkColor);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataBkResId(int resId) {
+    public IJZBaseRefreshRecycler setNoDataBkResId(int resId) {
         noDataView.setNoDataBkResId(resId);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataIconRes(int resId) {
+    public IJZBaseRefreshRecycler setNoDataIconRes(int resId) {
         noDataView.setNoDataIconRel(resId);
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setNoDataBtnClickListener(ITMRecyclerNoDataBtnClickListener noDataBtnClickListener) {
+    public IJZBaseRefreshRecycler setNoDataBtnClickListener(IJZRecyclerNoDataBtnClickListener noDataBtnClickListener) {
         this.noDataBtnClickListener = noDataBtnClickListener;
         return this;
     }
@@ -388,19 +389,19 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     /* *****************************************************************设置滑动相关监听************************************************************* */
 
     @Override
-    public ITMBaseRefreshRecycler setScrollFristChildChangeListener(ITMRecyclerScrollFristChildChangeListener fristChildChangeListener) {
+    public IJZBaseRefreshRecycler setScrollFristChildChangeListener(IJZRecyclerScrollFristChildChangeListener fristChildChangeListener) {
         this.fristChildChangeListener = fristChildChangeListener;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setScrollStopListener(ITMRecyclerScrollStopListener scrollStopListener) {
+    public IJZBaseRefreshRecycler setScrollStopListener(IJZRecyclerScrollStopListener scrollStopListener) {
         this.scrollStopListener = scrollStopListener;
         return this;
     }
 
     @Override
-    public ITMBaseRefreshRecycler setScrollListener(ITMRecyclerScrollOrientationListener scrollListener) {
+    public IJZBaseRefreshRecycler setScrollListener(IJZRecyclerScrollOrientationListener scrollListener) {
         this.scrollListener = scrollListener;
         return this;
     }
@@ -408,42 +409,42 @@ public abstract class JZBaseRecycler<T> extends RelativeLayout implements ITMBas
     /* *****************************************************************刷新Recycler才会用到的方法调用************************************************************* */
 
     @Override
-    public ITMBaseRefreshRecycler setRefreshHeadBkColor(int color) {
+    public IJZBaseRefreshRecycler setRefreshHeadBkColor(int color) {
         throw new RuntimeException("baseRecycler 方法调用异常 setRefreshHeadContentColor");
     }
 
     @Override
-    public ITMBaseRefreshRecycler setRefreshHeadContentColor(int color) {
+    public IJZBaseRefreshRecycler setRefreshHeadContentColor(int color) {
         throw new RuntimeException("baseRecycler 方法调用异常 setRefreshHeadContentColor");
     }
 
     @Override
-    public ITMBaseRefreshRecycler setRequestListDataListener(ITMRequestListDataListener listener) {
+    public IJZBaseRefreshRecycler setRequestListDataListener(IJZRequestListDataListener listener) {
         throw new RuntimeException("baseRecycler 方法调用异常 setRequestListDataListener");
     }
 
     @Override
-    public ITMBaseRefreshRecycler setEnableLoadMore(boolean isLoadMore) {
+    public IJZBaseRefreshRecycler setEnableLoadMore(boolean isLoadMore) {
         throw new RuntimeException("baseRecycler 方法调用异常 setEnableLoadMore");
     }
 
     @Override
-    public ITMBaseRefreshRecycler setEnableRefresh(boolean isRefresh) {
+    public IJZBaseRefreshRecycler setEnableRefresh(boolean isRefresh) {
         throw new RuntimeException("baseRecycler 方法调用异常 setEnableRefresh");
     }
 
     @Override
-    public ITMBaseRefreshRecycler setHeadViewRefreshStyle(SpinnerStyle type) {
+    public IJZBaseRefreshRecycler setHeadViewRefreshStyle(SpinnerStyle type) {
         throw new RuntimeException("baseRecycler 方法调用异常 setHeadViewRefreshStyle");
     }
 
     @Override
-    public ITMBaseRefreshRecycler autoRefresh() {
+    public IJZBaseRefreshRecycler autoRefresh() {
         throw new RuntimeException("baseRecycler 方法调用异常 autoRefresh");
     }
 
     @Override
-    public ITMBaseRefreshRecycler autoLoadMore() {
+    public IJZBaseRefreshRecycler autoLoadMore() {
         throw new RuntimeException("baseRecycler 方法调用异常 autoLoadMore");
     }
 

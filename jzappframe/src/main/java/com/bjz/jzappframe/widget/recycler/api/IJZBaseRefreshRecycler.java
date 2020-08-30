@@ -1,18 +1,19 @@
 package com.bjz.jzappframe.widget.recycler.api;
 
-import android.support.annotation.ColorRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.wy.viewFrame.wyRecycler.base.TMBaseView;
-import com.wy.viewFrame.wyRecycler.base.TMBaseViewHolderFromRecycler;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerItemClickListner;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerNoDataBtnClickListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollFristChildChangeListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollOrientationListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerScrollStopListener;
-import com.wy.viewFrame.wyRecycler.listener.ITMRequestListDataListener;
+import androidx.annotation.ColorRes;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bjz.jzappframe.widget.recycler.base.JZBaseView;
+import com.bjz.jzappframe.widget.recycler.base.JZBaseViewHolderFromRecycler;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerItemClickListner;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerNoDataBtnClickListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollFristChildChangeListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollOrientationListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerScrollStopListener;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRequestListDataListener;
+import com.bjz.jzappframe.widget.refreshlayout.constant.SpinnerStyle;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +21,6 @@ import java.util.List;
 /**
  * Created by 边江洲 on 2017/9/1.
  */
-
 public interface IJZBaseRefreshRecycler<T> {
 
     /* 是否开启加载（默认开启） */
@@ -81,13 +81,13 @@ public interface IJZBaseRefreshRecycler<T> {
     int getBaseRecyclerItemCount();
 
     /* 获取适配器viewHolder */
-    TMBaseViewHolderFromRecycler<T> getViewHolder(ViewGroup parent, int viewType);
+    JZBaseViewHolderFromRecycler<T> getViewHolder(ViewGroup parent, int viewType);
 
     /* 初始化item布局 */
-    void initItemView(TMBaseViewHolderFromRecycler holder, int position, List<T> data, int viewType);
+    void initItemView(JZBaseViewHolderFromRecycler holder, int position, List<T> data, int viewType);
 
     /* 设置item点击监听 */
-    void setItemClickListener(ITMRecyclerItemClickListner<TMBaseView, T> listener);
+    void setItemClickListener(IJZRecyclerItemClickListner<JZBaseView, T> listener);
 
     /* 设置列表类型 */
     IJZBaseRefreshRecycler setListType(String type);
@@ -131,18 +131,18 @@ public interface IJZBaseRefreshRecycler<T> {
     IJZBaseRefreshRecycler setNoDataBtnContentStr(String noDataBtnStr);
 
     /* 设置无内容按钮点击事件 */
-    IJZBaseRefreshRecycler setNoDataBtnClickListener(ITMRecyclerNoDataBtnClickListener noDataBtnClickListener);
+    IJZBaseRefreshRecycler setNoDataBtnClickListener(IJZRecyclerNoDataBtnClickListener noDataBtnClickListener);
 
 
     /* ********************************************************滑动相关监听********************************************** */
     /* 滑动方向监听 */
-    IJZBaseRefreshRecycler setScrollListener(ITMRecyclerScrollOrientationListener scrollListener);
+    IJZBaseRefreshRecycler setScrollListener(IJZRecyclerScrollOrientationListener scrollListener);
 
     /* 滑动停止监听 */
-    IJZBaseRefreshRecycler setScrollStopListener(ITMRecyclerScrollStopListener scrollStopListener);
+    IJZBaseRefreshRecycler setScrollStopListener(IJZRecyclerScrollStopListener scrollStopListener);
 
     /* 滑动中第一个显示的item的position和据地顶部位置改变监听 */
-    IJZBaseRefreshRecycler setScrollFristChildChangeListener(ITMRecyclerScrollFristChildChangeListener fristChildChangeListener);
+    IJZBaseRefreshRecycler setScrollFristChildChangeListener(IJZRecyclerScrollFristChildChangeListener fristChildChangeListener);
 
     /* ********************************************************刷新recycler中调用的方法********************************************** */
 
@@ -153,6 +153,6 @@ public interface IJZBaseRefreshRecycler<T> {
     IJZBaseRefreshRecycler setRefreshHeadContentColor(int color);
 
     /* 请求数据监听 */
-    IJZBaseRefreshRecycler setRequestListDataListener(ITMRequestListDataListener listener);
+    IJZBaseRefreshRecycler setRequestListDataListener(IJZRequestListDataListener listener);
 
 }

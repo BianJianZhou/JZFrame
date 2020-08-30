@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.wy.viewFrame.util.Utils;
+import com.bjz.jzappframe.utils.JZUtil;
 
 import java.util.List;
 import java.util.Observable;
@@ -40,8 +40,8 @@ public abstract class JZBaseView<T> extends RelativeLayout implements Observer {
     public JZBaseView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
-        screenWidth = Utils.screenWidth(context);
-        screenHeight = Utils.screenHeigth(context);
+        screenWidth = JZUtil.screenWidth(context);
+        screenHeight = JZUtil.screenHeigth(context);
         onCreate(context, attrs, defStyleAttr);
     }
 

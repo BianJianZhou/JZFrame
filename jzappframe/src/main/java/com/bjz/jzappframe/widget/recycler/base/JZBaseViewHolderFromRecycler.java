@@ -1,11 +1,12 @@
 package com.bjz.jzappframe.widget.recycler.base;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by 边江洲 on 2017/9/1.

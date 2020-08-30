@@ -6,8 +6,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import com.bjz.jzappframe.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -136,5 +141,14 @@ public class JZUtil {
 
     /* 资源id转化为bitmap */
 
+
+    /**
+     * 组件点击放大动画
+     */
+    public static void viewClickBigAnim(Context context, View view) {
+        Animation animation = AnimationUtils.loadAnimation(context,
+                R.anim.view_click_big_anim);
+        view.startAnimation(animation);
+    }
 
 }

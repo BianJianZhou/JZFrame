@@ -1,13 +1,14 @@
-package com.bjz.jzappframe.widget.recycler.recycler;
+package com.bjz.jzappframe.widget.recycler;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.wy.viewFrame.R;
-import com.wy.viewFrame.util.Diction;
-import com.wy.viewFrame.util.WYToast;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bjz.jzappframe.R;
+import com.bjz.jzappframe.utils.JZToast;
+import com.bjz.jzappframe.widget.recycler.util.JZDiction;
 
 import java.util.Collection;
 
@@ -66,7 +67,7 @@ public abstract class JZNormalRecycler<T> extends JZBaseRecycler<T> {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.tm_base_recycler_view;
+        return R.layout.jz_base_recycler_view;
     }
 
     @Override
@@ -78,22 +79,22 @@ public abstract class JZNormalRecycler<T> extends JZBaseRecycler<T> {
                 recyclerView.setAdapter(adapter);
             } else {
                 switch (adapterState) {
-                    case Diction.AdapterState.AdapterRefresh:
+                    case JZDiction.AdapterState.AdapterRefresh:
                         if (datas != null && datas.size() > 0) {
                             adapter.refresh(datas);
                         }
                         dataJudgeNoDataViewShowState(datas);
                         break;
-                    case Diction.AdapterState.AdapterLoadMore:
+                    case JZDiction.AdapterState.AdapterLoadMore:
                         adapter.loadmore(datas);
                         if (datas.size() == 0) {
-                            WYToast.showShortToast(context, "亲，没有更多数据了");
+                            JZToast.showShortToast(context, "亲，没有更多数据了");
                         }
                         break;
                     default:
                         break;
                 }
-                if (datas.size() == 0 && page > 1 && Diction.AdapterState.AdapterLoadMore.equals(adapterState)) {
+                if (datas.size() == 0 && page > 1 && JZDiction.AdapterState.AdapterLoadMore.equals(adapterState)) {
                     page--;
                 }
             }
@@ -109,22 +110,22 @@ public abstract class JZNormalRecycler<T> extends JZBaseRecycler<T> {
                 recyclerView.setAdapter(adapter);
             } else {
                 switch (adapterState) {
-                    case Diction.AdapterState.AdapterRefresh:
+                    case JZDiction.AdapterState.AdapterRefresh:
                         if (datas != null) {
                             adapter.refresh(datas);
                         }
                         dataJudgeNoDataViewShowState(datas);
                         break;
-                    case Diction.AdapterState.AdapterLoadMore:
+                    case JZDiction.AdapterState.AdapterLoadMore:
                         adapter.loadmore(datas);
                         if (datas.size() == 0) {
-                            WYToast.showShortToast(context, "亲，没有更多数据了");
+                            JZToast.showShortToast(context, "亲，没有更多数据了");
                         }
                         break;
                     default:
                         break;
                 }
-                if (datas.size() == 0 && page > 1 && Diction.AdapterState.AdapterLoadMore.equals(adapterState)) {
+                if (datas.size() == 0 && page > 1 && JZDiction.AdapterState.AdapterLoadMore.equals(adapterState)) {
                     page--;
                 }
             }

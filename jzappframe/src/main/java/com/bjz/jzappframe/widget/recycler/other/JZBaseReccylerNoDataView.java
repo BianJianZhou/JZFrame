@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wy.viewFrame.R;
-import com.wy.viewFrame.wyRecycler.item.TMBaseItemView_FromRes;
-import com.wy.viewFrame.wyRecycler.listener.ITMRecyclerNoDataBtnClickListener;
-import com.wy.viewFrame.util.Utils;
+import com.bjz.jzappframe.R;
+import com.bjz.jzappframe.utils.JZUtil;
+import com.bjz.jzappframe.widget.recycler.item.JZBaseItemView_FromRes;
+import com.bjz.jzappframe.widget.recycler.listener.IJZRecyclerNoDataBtnClickListener;
 
 /**
  * ==================================
@@ -25,10 +25,10 @@ import com.wy.viewFrame.util.Utils;
  
  
 */
-public class JZBaseReccylerNoDataView extends TMBaseItemView_FromRes<String> {
+public class JZBaseReccylerNoDataView extends JZBaseItemView_FromRes<String> {
 
     /* 无数据按钮点击监听 */
-    ITMRecyclerNoDataBtnClickListener noDataBtnClickListener;
+    IJZRecyclerNoDataBtnClickListener noDataBtnClickListener;
 
     private TextView
             noDataExplanText,
@@ -52,7 +52,7 @@ public class JZBaseReccylerNoDataView extends TMBaseItemView_FromRes<String> {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.tm_list_nodata_view;
+        return R.layout.jz_list_nodata_view;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class JZBaseReccylerNoDataView extends TMBaseItemView_FromRes<String> {
             if (noDataBtnClickListener != null) {
                 noDataBtnClickListener.click();
             }
-            Utils.viewClickBigAnim(context, noDataBtnText);
+            JZUtil.viewClickBigAnim(context, noDataBtnText);
         });
     }
 
@@ -122,7 +122,7 @@ public class JZBaseReccylerNoDataView extends TMBaseItemView_FromRes<String> {
         return this;
     }
 
-    public JZBaseReccylerNoDataView setNoDataBtnClickListener(ITMRecyclerNoDataBtnClickListener noDataBtnClickListener) {
+    public JZBaseReccylerNoDataView setNoDataBtnClickListener(IJZRecyclerNoDataBtnClickListener noDataBtnClickListener) {
         this.noDataBtnClickListener = noDataBtnClickListener;
         return this;
     }

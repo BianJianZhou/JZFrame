@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.wy.viewFrame.wyRecycler.base.TMBaseView;
+import com.bjz.jzappframe.widget.recycler.base.JZBaseView;
 
 /**
  * Created by 边江洲 on 2017/8/29.
@@ -18,7 +18,7 @@ import com.wy.viewFrame.wyRecycler.base.TMBaseView;
  * 3: 如果有组件赋值的过程必须 先调用 setData 传入 数据对象
   *
   * */
-public abstract class JZBaseItemView_FromRes<T> extends TMBaseView<T> {
+public abstract class JZBaseItemView_FromRes<T> extends JZBaseView<T> {
 
     View itemView;
 

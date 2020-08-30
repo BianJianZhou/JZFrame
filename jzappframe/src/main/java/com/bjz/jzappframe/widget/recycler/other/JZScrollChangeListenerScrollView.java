@@ -1,4 +1,4 @@
-package com.bjz.jzappframe.widget.recycler.listener;
+package com.bjz.jzappframe.widget.recycler.other;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,21 +8,21 @@ import android.widget.ScrollView;
  * Created by 边江洲 on 2017/8/24.
  */
 
-public class IJZScrollChangeListenerScrollView extends ScrollView {
+public class JZScrollChangeListenerScrollView extends ScrollView {
 
     Context context;
 
     TMScrollViewScrollChangeListener scrollViewListener;
 
-    public IJZScrollChangeListenerScrollView(Context context) {
+    public JZScrollChangeListenerScrollView(Context context) {
         this(context, null);
     }
 
-    public IJZScrollChangeListenerScrollView(Context context, AttributeSet attrs) {
+    public JZScrollChangeListenerScrollView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public IJZScrollChangeListenerScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public JZScrollChangeListenerScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
