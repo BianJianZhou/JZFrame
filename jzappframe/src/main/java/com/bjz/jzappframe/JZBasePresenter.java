@@ -24,18 +24,18 @@ import android.content.Context;
 */
 public class JZBasePresenter<T extends IJZBaseView> {
 
-    public T ijzBaseView;
+    public T iView;
 
     public Context context;
 
     public JZBasePresenter(T ijzBaseView, Context context) {
-        this.ijzBaseView = ijzBaseView;
+        this.iView = ijzBaseView;
         this.context = context;
 
     }
 
     public void onDestory() {
-        ijzBaseView = null;
+        iView = null;
     }
 
 }
