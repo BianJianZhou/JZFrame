@@ -80,7 +80,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
             screenW,
             screenH;
 
-    T presenter;
+    public T presenter;
 
     /* 组件相关 */
     private View top1PxView = null;
