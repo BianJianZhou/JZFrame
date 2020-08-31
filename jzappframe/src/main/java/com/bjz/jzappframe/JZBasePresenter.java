@@ -22,13 +22,13 @@ import android.content.Context;
 在调用request 前 先进行总的网络判断  是否有网 （ping） 无网络状态下，页面的友好提示
 
 */
-public class JZBasePresenter {
+public class JZBasePresenter<T extends IJZBaseView> {
 
-    public IJZBaseView ijzBaseView;
+    public T ijzBaseView;
 
     public Context context;
 
-    public JZBasePresenter(IJZBaseView ijzBaseView, Context context) {
+    public JZBasePresenter(T ijzBaseView, Context context) {
         this.ijzBaseView = ijzBaseView;
         this.context = context;
 
