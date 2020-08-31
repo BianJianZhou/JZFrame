@@ -28,8 +28,8 @@ public class JZBasePresenter<T extends IJZBaseView> {
 
     public Context context;
 
-    public JZBasePresenter(T ijzBaseView, Context context) {
-        this.iView = ijzBaseView;
+    public JZBasePresenter(T iView, Context context) {
+        this.iView = iView;
         this.context = context;
 
     }
