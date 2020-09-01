@@ -93,7 +93,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
     /* layout组件 */
     View view;
     /* 默认titleView */
-    JZTitleView titleView;
+    public JZTitleView titleView;
 
     private JZViewsConfigBuilder configBuilder;
 
