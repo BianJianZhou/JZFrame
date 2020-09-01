@@ -8,6 +8,7 @@ import com.bjz.jzappframe.JZButterKnif.JZBindView;
 import com.bjz.jzappframe.JZButterKnif.JZButterKnif;
 import com.bjz.jzappframe.JZButterKnif.JZOnClick;
 import com.bjz.jzappframe.ui.JZBaseActivity;
+import com.bjz.jzappframe.widget.title.titleChild.JZTitleRightTextGroup;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -63,6 +64,11 @@ public class MainActivity extends JZBaseActivity<MainPresenter> {
 
     @Override
     public void initData() {
+        titleView.setRightTextGroup(new JZTitleRightTextGroup(this).addItem_TextView("完成", v -> {
+            showToast("完成点击");
+        }).addItem_TextView("你好",v -> {
+
+        }));
     }
 
     @Override

@@ -2,8 +2,11 @@ package com.bjz.jzappframe.widget.title;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.widget.title.titleChild.JZTitleRightTextGroup;
 
 /**

@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.bjz.jzappframe.JZUIFrameManager;
 import com.bjz.jzappframe.JZViewsConfigBuilder;
+import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.utils.JZPageAnimUtils;
 
 public class JZTitleView extends JZTitleDataView {
@@ -92,9 +93,10 @@ public class JZTitleView extends JZTitleDataView {
         addView(titleText, titleTextParams);
         /* 添加右侧容器 */
         rightGroupRl = new RelativeLayout(context);
-        RelativeLayout.LayoutParams rightGrouRlParmas = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams rightGrouRlParmas = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         rightGrouRlParmas.setMargins(0, 0, viewsBuilder.getTitleRightGroupMarginRight(), 0);
         rightGrouRlParmas.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        rightGroupRl.setGravity(Gravity.CENTER_VERTICAL);
         addView(rightGroupRl, rightGrouRlParmas);
         /* 底部横线 */
         bottomHorLineView = new View(context);
