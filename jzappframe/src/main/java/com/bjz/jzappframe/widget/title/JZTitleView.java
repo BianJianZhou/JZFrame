@@ -2,6 +2,7 @@ package com.bjz.jzappframe.widget.title;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -30,7 +31,7 @@ public class JZTitleView extends JZTitleDataView {
     private View backBtnView;
 
     /* 标题文字 */
-    private TextView titleText;
+    private JZTextView titleText;
 
     /* 底部横线 */
     private View bottomHorLineView;
@@ -85,7 +86,8 @@ public class JZTitleView extends JZTitleDataView {
         addView(xIconView, xIconViewParams);
         xIconView.setVisibility(View.GONE);
         /* titleText */
-        titleText = new TextView(context);
+        titleText = new JZTextView(context);
+        titleText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
         titleText.setTextSize(viewsBuilder.getTitleTextSize());
         titleText.setTextColor(viewsBuilder.getTitleTextColor());
         RelativeLayout.LayoutParams titleTextParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);

@@ -19,7 +19,7 @@ public class MyApplication extends Application {
                 .setxIconH((int) getResources().getDimension(R.dimen.dimens_20))
                 .setxIconMarginLeft((int) getResources().getDimension(R.dimen.dimens_10))
                 .setxIconBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.tm_back_black_icon))
-                .setTitleTextSize((int) getResources().getDimension(R.dimen.dimens_8))
+                .setTitleTextSize((int) getResources().getDimension(R.dimen.dimens_24))
                 .setTitleTextColor((int) getResources().getColor(R.color.colorPrimary))
                 .setTitleRightGroupItemSpace((int) getResources().getDimension(R.dimen.dimens_8))
                 .setTitleRightGroupTextSize((int) getResources().getDimension(R.dimen.dimens_8))

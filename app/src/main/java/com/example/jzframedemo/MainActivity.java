@@ -50,7 +50,7 @@ public class MainActivity extends JZBaseActivity<MainPresenter> {
 
     @Override
     public void initView() {
-        setTitle("MainActivity");
+        setTitle("添加客户");
         Glide.with(this).pauseRequests();
         JZButterKnif.bind(this);
         pauseText.setText("asfd");
