@@ -23,11 +23,11 @@ public class MyApplication extends Application {
                 .setTitleTextColor((int) getResources().getColor(R.color.colorPrimary))
                 .setTitleRightGroupItemSpace((int) getResources().getDimension(R.dimen.dimens_8))
                 .setTitleRightGroupTextSize((int) getResources().getDimension(R.dimen.dimens_8))
-                .setTitleRightGroupTextColor((int) getResources().getColor(R.color.colorAccent))
+                .setTitleRightGroupTextColor((int) getResources().getColor(R.color._ff8f0a))
                 .setTitleRightGroupMarginRight((int) getResources().getDimension(R.dimen.dimens_10))
                 .setScrollBackLeftW((int) getResources().getDimension(R.dimen.dimens_20))
                 .setTitleBottomHorLineViewH((int) getResources().getDimension(R.dimen.dimens_1))
-                .setTitleBottomHorLineColor(getResources().getColor(R.color.colorAccent))
+                .setTitleBottomHorLineColor(getResources().getColor(R.color._e5e5e5))
                 .setCustomToastHeight((int) getResources().getDimension(R.dimen.dimens_50));
     }
 }

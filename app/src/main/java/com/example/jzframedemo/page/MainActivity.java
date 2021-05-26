@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends JZBaseActivity<MainPresenter> {
+    
     private final String TAG = "MainActivity";
 
     @JZBindView(R.id.pause)
