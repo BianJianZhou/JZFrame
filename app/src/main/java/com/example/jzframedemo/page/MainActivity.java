@@ -1,4 +1,4 @@
-package com.example.jzframedemo;
+package com.example.jzframedemo.page;
 
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +10,10 @@ import com.bjz.jzappframe.JZButterKnif.JZOnClick;
 import com.bjz.jzappframe.ui.JZBaseActivity;
 import com.bjz.jzappframe.widget.title.titleChild.JZTitleRightTextGroup;
 import com.bumptech.glide.Glide;
+import com.example.jzframedemo.bean.MyData;
+import com.example.jzframedemo.view.MyListView;
+import com.example.jzframedemo.R;
+import com.example.jzframedemo.presenter.MainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

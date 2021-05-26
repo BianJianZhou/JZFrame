@@ -1,4 +1,4 @@
-package com.example.jzframedemo;
+package com.example.jzframedemo.presenter;
 
 import android.content.Context;
 

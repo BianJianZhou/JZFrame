@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".page.MainActivity">
 
     <TextView
         android:id="@+id/hellow"
@@ -45,7 +45,7 @@
             android:textSize="@dimen/dimens_18" />
     </LinearLayout>
 
-    <com.example.jzframedemo.MyListView
+    <com.example.jzframedemo.view.MyListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_600"

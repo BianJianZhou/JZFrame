@@ -114,7 +114,7 @@ public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends 
         if (pageConfigTemp != null) {
             jzPageConfig = pageConfigTemp;
         } else {
-            jzPageConfig = JZPageConfig.getInstance();
+            jzPageConfig = JZPageConfig.newInstance();
         }
         isResume = false;
         isPause = false;
@@ -150,6 +150,7 @@ public abstract class JZBaseFragmentActivity<T extends JZBasePresenter> extends 
         /* 判断添加默认titleView */
         if (jzPageConfig.isAddTitleView()) {
             titleView = new JZTitleView(this);
+            titleView.setJzPageConfig(pageConfigTemp);
             RelativeLayout.LayoutParams titleViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             if (jzPageConfig.isAddTopView() && !jzPageConfig.isAddTitleView()) {
                 titleViewParams.setMargins(0, JZUtil.getStatusBarHeight(this), 0, 0);

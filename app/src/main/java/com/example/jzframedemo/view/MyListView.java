@@ -1,4 +1,4 @@
-package com.example.jzframedemo;
+package com.example.jzframedemo.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bjz.jzappframe.widget.recycler.JZRefreshRecycler;
 import com.bjz.jzappframe.widget.recycler.base.JZBaseViewHolderFromRecycler;
+import com.example.jzframedemo.bean.MyData;
 
 import java.util.List;
 

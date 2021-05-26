@@ -1,4 +1,4 @@
-package com.example.jzframedemo;
+package com.example.jzframedemo.bean;
 
 public class MyData {
     String id;

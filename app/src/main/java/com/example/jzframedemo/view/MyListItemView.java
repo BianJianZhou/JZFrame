@@ -1,4 +1,4 @@
-package com.example.jzframedemo;
+package com.example.jzframedemo.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bjz.jzappframe.widget.recycler.item.JZBaseItemView_FromView;
+import com.example.jzframedemo.bean.MyData;
+import com.example.jzframedemo.R;
 
 public class MyListItemView extends JZBaseItemView_FromView<MyData> {
     public MyListItemView(Context context) {

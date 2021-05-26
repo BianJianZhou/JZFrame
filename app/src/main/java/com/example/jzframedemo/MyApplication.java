@@ -11,8 +11,8 @@ public class MyApplication extends Application {
         super.onCreate();
         JZUIFrameManager.getInstance().getViewsConfigBuilder()
                 .setTitleViewH((int) getResources().getDimension(R.dimen.dimens_66))
-                .setBackBtnW((int) getResources().getDimension(R.dimen.dimens_20))
-                .setBackBtnH((int) getResources().getDimension(R.dimen.dimens_20))
+                .setBackBtnW((int) getResources().getDimension(R.dimen.dimens_15))
+                .setBackBtnH((int) getResources().getDimension(R.dimen.dimens_27))
                 .setBackBtnBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.tm_back_black_icon))
                 .setBackBtnMarginLeft((int) getResources().getDimension(R.dimen.dimens_10))
                 .setxIconW((int) getResources().getDimension(R.dimen.dimens_20))

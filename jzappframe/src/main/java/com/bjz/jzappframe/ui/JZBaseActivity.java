@@ -113,7 +113,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         if (pageConfigTemp != null) {
             jzPageConfig = pageConfigTemp;
         } else {
-            jzPageConfig = JZPageConfig.getInstance();
+            jzPageConfig = JZPageConfig.newInstance();
         }
         isResume = false;
         isPause = false;
@@ -149,6 +149,7 @@ public abstract class JZBaseActivity<T extends JZBasePresenter> extends Activity
         /* 判断添加默认titleView */
         if (jzPageConfig.isAddTitleView()) {
             titleView = new JZTitleView(this);
+            titleView.setJzPageConfig(pageConfigTemp);
             RelativeLayout.LayoutParams titleViewParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, configBuilder.getTitleViewH());
             if (!jzPageConfig.isAddTopView() && jzPageConfig.isImersive()) {
                 titleViewParams.setMargins(0, JZUtil.getStatusBarHeight(this), 0, 0);

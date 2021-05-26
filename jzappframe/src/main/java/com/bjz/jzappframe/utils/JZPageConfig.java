@@ -15,7 +15,7 @@ package com.bjz.jzappframe.utils;
  
 */public class JZPageConfig {
 
-    public static JZPageConfig getInstance() {
+    public static JZPageConfig newInstance() {
         JZPageConfig pageConfig = new JZPageConfig();
         return pageConfig;
     }
@@ -30,6 +30,8 @@ package com.bjz.jzappframe.utils;
         isImersive = true;
 
         isImersiveDark = true;
+
+        isAddTitleBackIcon = true;
     }
 
     /* 是否点击非输入区域软键盘消失 */
@@ -39,9 +41,20 @@ package com.bjz.jzappframe.utils;
 
     private boolean isAddTitleView;
 
+    /**
+     * 是否沉浸式
+     */
     private boolean isImersive;
 
+    /**
+     * 状态栏内容是否深色
+     */
     private boolean isImersiveDark;
+
+    /**
+     * 是否添加title左侧返回按钮
+     */
+    private boolean isAddTitleBackIcon;
 
 
     public JZPageConfig setTouchHideKeyBroad(boolean touchHideKeyBroad) {
@@ -87,5 +100,14 @@ package com.bjz.jzappframe.utils;
 
     public boolean isImersiveDark() {
         return isImersiveDark;
+    }
+
+    public boolean isAddTitleBackIcon() {
+        return isAddTitleBackIcon;
+    }
+
+    public JZPageConfig setAddTitleBackIcon(boolean addTitleBackIcon) {
+        isAddTitleBackIcon = addTitleBackIcon;
+        return this;
     }
 }

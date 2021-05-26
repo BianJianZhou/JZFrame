@@ -29,7 +29,7 @@ public class JZUIFrameManager {
 
     /*
     请配置 缺少对应参数会 抛异常：
-    JZUIFrameManager.getInstance().getViewsConfigBuilder()
+    JZUIFrameManager.newInstance().getViewsConfigBuilder()
                 .setTitleViewH((int) getResources().getDimension(R.dimen.dimens_66))
                 .setBackBtnW((int) getResources().getDimension(R.dimen.dimens_20))
                 .setBackBtnH((int) getResources().getDimension(R.dimen.dimens_20))

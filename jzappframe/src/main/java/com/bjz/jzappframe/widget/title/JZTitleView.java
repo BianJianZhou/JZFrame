@@ -18,6 +18,7 @@ import com.bjz.jzappframe.JZUIFrameManager;
 import com.bjz.jzappframe.JZViewsConfigBuilder;
 import com.bjz.jzappframe.R;
 import com.bjz.jzappframe.utils.JZPageAnimUtils;
+import com.bjz.jzappframe.utils.JZPageConfig;
 
 public class JZTitleView extends JZTitleDataView {
 
@@ -42,6 +43,7 @@ public class JZTitleView extends JZTitleDataView {
     /* 返回点击回调 */
     private TMTitleBackListener backListener;
 
+
     public JZTitleView(Context context) {
         this(context, null);
     }
@@ -56,6 +58,16 @@ public class JZTitleView extends JZTitleDataView {
         viewsBuilder = JZUIFrameManager.getInstance().getViewsConfigBuilder();
         initView();
         setListener();
+    }
+
+    public void setJzPageConfig(JZPageConfig jzPageConfig) {
+        if (jzPageConfig != null) {
+            if (jzPageConfig.isAddTitleBackIcon()) {
+                backBtnView.setVisibility(View.VISIBLE);
+            } else {
+                backBtnView.setVisibility(View.GONE);
+            }
+        }
     }
 
     /**

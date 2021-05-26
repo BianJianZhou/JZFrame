@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/_ffffff">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="W E L C O M E  -  H O M E"
+        android:textSize="@dimen/dimens_20"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/home_skip_test_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimens_100"
+        android:text="SKIP TEST ACTIVITY"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/dimens_30" />
+
+</RelativeLayout>
